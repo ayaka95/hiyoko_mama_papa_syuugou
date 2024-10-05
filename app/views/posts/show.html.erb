@@ -1,2 +1,11 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+<div>
+  <p>ユーザー名: <%= @post.user.name %></p>
+  <p>ユーザー画像: <%= image_tag 'no_image.jpg' %></p>
+  <p>タイトル: <%= @post.title %></p>
+  <%= image_tag @post.get_image %>
+  <p>本文: <%= @post.body %></p>
+  <% if @post.user == current_user %>
+    <%= link_to "削除", post_path(@post), method: :delete %>
+  <% end %>
+</div>

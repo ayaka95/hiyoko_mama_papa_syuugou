@@ -1,4 +1,4 @@
-<h1>投稿一覧</h1>
+
 <h1>新規投稿</h1>
 <%= form_with model: @post do |f| %>
   <h4>タイトル</h4>
@@ -9,3 +9,20 @@
   <%= f.text_area :body %>
   <%= f.submit '投稿' %>
 <% end %>
+
+<h1>投稿一覧</h1>
+<div>
+  <% @posts.each do |post| %>
+    <p>ユーザー名:
+      <%= link_to user_path(post.user.id) do %>
+        <%= post.user.name %>
+      <% end %>
+    </p>
+    <p>ユーザー画像:<%= image_tag 'no_image.jpg' %></p>
+    <p>タイトル:
+      <%= link_to post_path(post.id) do %>
+        <%= post.title %>
+      <% end %>
+    </p>
+  <% end %>
+</div>

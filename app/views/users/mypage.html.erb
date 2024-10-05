@@ -1,0 +1,22 @@
+<h1>マイページ</h1>
+<div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <!-- 自己紹介文-->
+  <% if @user == current_user %> <!--マイページの表示をそもそもログインユーザーのみにしたい-->
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+</div>
+
+<h1>投稿一覧</h1>
+<% @posts.each do |post| %>
+<div>
+  <p>タイトル:
+    <%= link_to post_path(post.id) do %>
+      <%= post.title %>
+    <% end %>
+  </p>
+  <p>投稿画像:<%= image_tag post.get_image %></p>
+  <p>本文: <%= post.body %></p>
+</div>
+<% end %>
