@@ -1,11 +1,11 @@
 <h1>投稿詳細</h1>
 <div>
   <p>ユーザー名: <%= @post.user.name %></p>
-  <p>ユーザー画像: <%= image_tag 'no_image.jpg' %></p>
+  <p>ユーザー画像: <%= image_tag @post.user.get_profile_image(100,100) %></p>
   <p>タイトル: <%= @post.title %></p>
-  <%= image_tag @post.get_image %>
+  <p>画像: <%= image_tag @post.get_image %></p>
   <p>本文: <%= @post.body %></p>
   <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete %>
+    <%= link_to "削除", post_path(@post), method: :delete %>|<%= link_to "編集", edit_post_path(@post) %>
   <% end %>
 </div>

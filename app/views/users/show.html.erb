@@ -2,7 +2,7 @@
 <div>
   <h3><%= @user.name %></h3>
   <%= image_tag @user.get_profile_image(100,100) %>
-  <!--自己紹介文-->
+  <%= @user.introduction %>
 </div>
 
 <h2>投稿一覧</h2>
@@ -17,3 +17,4 @@
   <p>本文: <%= post.body %></p>
 </div>
 <% end %>
+<%= paginate @posts %>

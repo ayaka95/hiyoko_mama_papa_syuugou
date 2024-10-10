@@ -4,15 +4,18 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.page(params[:page])
   end
 
   def create
+    @posts = Post.page(params[:page])
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    #投稿後は投稿詳細へリダイレクトさせたい post_path
-    redirect_to posts_path
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      render :index
+    end
   end
 
   def show
@@ -24,6 +27,20 @@ class PostsController < ApplicationController
     post.delete
     redirect_to posts_path
   end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
+  end
+
 
   private
 

@@ -1,0 +1,10 @@
+<h1>ユーザー一覧</h1>
+<% @users.each do |user| %>
+  <p>ユーザー名:
+    <%= link_to user_path(user.id) do %>
+      <%= user.name %>
+    <% end %>
+  </p>
+  <%= image_tag user.get_profile_image(100,100) %>
+<% end %>
+<%= paginate @users %>

@@ -2,9 +2,11 @@
 <div>
   <h3><%= @user.name %></h3>
   <%= image_tag @user.get_profile_image(100,100) %>
-  <!-- 自己紹介文-->
-  <% if @user == current_user %> <!--マイページの表示をそもそもログインユーザーのみにしたい-->
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <%= @user.introduction %>
+  <% if @user == current_user %>
+    <% unless @user.guest_user? %>
+      <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+    <% end %>
   <% end %>
 </div>
 
