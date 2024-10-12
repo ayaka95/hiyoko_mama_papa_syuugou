@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit, :update]
-  
+
   def index
     @users = User.page(params[:page])
   end
@@ -26,6 +26,13 @@ class UsersController < ApplicationController
     redirect_to mypage_path
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = 'ユーザーを削除しました'
+    redirect_to new_user_registration_path
+  end
+
   private
 
   def user_params
@@ -45,5 +52,5 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
   end
-  
+
 end

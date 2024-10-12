@@ -2,15 +2,15 @@
 <html>
   <head>
     <title>ヒヨコママパパ集合</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/59989751c1.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
       <% flash.each do |message_type, message| %>
         <div>
@@ -18,40 +18,54 @@
         </div>
       <% end %>
 
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "マイページ", mypage_path %>
-        </li>
-        <li>
-          <%= link_to "アバウト", about_path %>
-        </li>
-        <li>
-          <%= link_to "投稿一覧", posts_path %>
-        </li>
-        <li>
-          <%= link_to "ユーザー一覧", users_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "トップ", root_path %>
-        </li>
-        <li>
-          <%= link_to "アバウト", about_path %>
-        </li>
-        <li>
-          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container border">
+          <div class="row">
+            <a class="navbar-brand p-3" href="/"><%= image_tag('animal_mark_hiyoko.png') %></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <% if user_signed_in? %>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <%= link_to "マイページ", mypage_path %>
+                  </li>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <%= link_to "投稿一覧", posts_path %>
+                  </li>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-users"></i>
+                    <%= link_to "ユーザー一覧", users_path %>
+                  </li>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  </li>
+                <% else %>
+                   <li class="mr-3">
+                     <i class="fa-solid fa-masks-theater"></i>
+                    <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
+                  </li>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <%= link_to "新規登録", new_user_registration_path %>
+                  </li>
+                  <li class="mr-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <%= link_to "ログイン", new_user_session_path %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
