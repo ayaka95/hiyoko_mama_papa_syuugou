@@ -19,7 +19,7 @@
       <%= post.title %>
     <% end %>
   </p>
-  <p>投稿画像:<%= image_tag post.get_image %></p>
+  <p>投稿画像:<%= image_tag post.get_image(100,100) %></p>
   <p>本文: <%= post.body %></p>
 </div>
 <% end %>

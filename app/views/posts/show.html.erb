@@ -1,11 +1,18 @@
-<h1>投稿詳細</h1>
-<div>
-  <p>ユーザー名: <%= @post.user.name %></p>
-  <p>ユーザー画像: <%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>タイトル: <%= @post.title %></p>
-  <p>画像: <%= image_tag @post.get_image %></p>
-  <p>本文: <%= @post.body %></p>
-  <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "投稿を削除しますか？" %>|<%= link_to "編集", edit_post_path(@post) %>
-  <% end %>
+<div class="container">
+  <h1>投稿詳細</h1>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="row mx-4">
+      <p class="mt-4"><%= image_tag @post.user.get_profile_image(70,70), class: :"rounded-circle" %></p>
+      <h4 class="d-flex align-items-center"><%= @post.user.name %></h4>
+    </div>
+    <h4 class="mx-4">タイトル: <%= @post.title %></h4>
+    <p class="mx-auto"><%= image_tag @post.get_image(500,500) %></p>
+    <p class="mx-4">本文:</br> <%= @post.body %></p>
+  </div>
+  <h4>
+    <% if @post.user == current_user %>
+      <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "投稿を削除しますか？" %>|<%= link_to "編集", edit_post_path(@post) %>
+    <% end %>
+  </h4>
+
 </div>
