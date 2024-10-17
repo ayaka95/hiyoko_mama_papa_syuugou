@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def mypage
     @user = User.find(current_user.id)
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page])
   end
 
   def update
