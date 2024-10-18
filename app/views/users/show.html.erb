@@ -1,20 +1,12 @@
-<h1>ユーザー詳細</h1>
-<div>
-  <h3><%= @user.name %></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <%= @user.introduction %>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-4 p-4">
+      <h1>ユーザー詳細</h1>
+      <%= image_tag @user.get_profile_image(100,100), class: :"rounded-circle" %>
+      <h3><%= @user.name %></h3>
+      <%= @user.introduction %>
+    </div>
 
-<h2>投稿一覧</h2>
-<% @posts.each do |post| %>
-<div>
-  <p>タイトル:
-    <%= link_to post_path(post.id) do %>
-      <%= post.title %>
-    <% end %>
-  </p>
-  <p>投稿画像:<%= image_tag post.get_image(100,100) %></p>
-  <p>本文: <%= post.body %></p>
+    <%= render 'users_index', posts: @posts %>
+  </div>
 </div>
-<% end %>
-<%= paginate @posts %>

@@ -1,0 +1,29 @@
+<div class="col-8 p-4">
+  <h1>投稿一覧</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">投稿画像</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">本文</th>
+      </tr>
+    </thead>
+    <% posts.each do |post| %>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <td><%= image_tag post.get_image(100,100) %></td>
+          <td>
+          <%= link_to post_path(post.id) do %>
+            <%= post.title %>
+          <% end %>
+          </td>
+          <td><%= post.body %></td>
+        </th>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  <%= paginate posts %>
+</div>
