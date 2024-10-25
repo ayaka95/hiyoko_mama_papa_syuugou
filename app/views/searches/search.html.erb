@@ -1,0 +1,6 @@
+<% if @range == "投稿" %>
+  <p>"<%= @word %>"の検索結果</p>
+    <% @posts.each do |post| %>
+      <p><%= post.title %></p>
+    <% end %>
+<% end %>

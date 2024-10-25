@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <div class="row">
     <div class="col-4 p-4">
       <h1>新規投稿</h1>
@@ -47,7 +48,8 @@
         </tbody>
         <% end %>
         </table>
-        <%= paginate @posts %>
+
+      <%= paginate @posts %>
     </div>
     </div>
   </div>
