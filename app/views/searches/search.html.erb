@@ -4,3 +4,10 @@
       <p><%= post.title %></p>
     <% end %>
 <% end %>
+
+<% if @range == "ユーザー" %>
+  <p>"<%= @word %>"の検索結果</p>
+    <% @users.each do |user| %>
+      <p><%= user.name %></p>
+    <% end %>
+<% end %>
