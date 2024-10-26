@@ -11,5 +11,5 @@ Rails.application.routes.draw do
 
 
    get 'mypage' => 'users#mypage', as: 'mypage'
-   get 'search' => 'searches#search'
+   post 'search' => 'searches#search'
 end
