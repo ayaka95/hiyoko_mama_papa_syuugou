@@ -1,0 +1,60 @@
+<div class="container">
+  <% if @range == "投稿" %>
+  <h1>"<%= @word %>"の検索結果</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">投稿画像</th>
+        <th scope="col">タイトル</th>
+      </tr>
+    </thead>
+    <% @posts.each do |post| %>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <td><%= image_tag post.get_image(100,100) %></td>
+          <td>
+            <%= link_to post_path(post.id) do %>
+              <%= post.title %>
+            <% end %>
+          </td>
+        </th>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  <% end %>
+
+  <% if @range == "ユーザー" %>
+  <h1>"<%= @word %>"の検索結果</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ユーザー画像</th>
+        <th scope="col">ユーザー名</th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <td><%= image_tag user.get_profile_image(100,100), class: :"rounded-circle" %></td>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.introduction %></td>
+        </th>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  <% end %>
+</div>
+
+
+
+

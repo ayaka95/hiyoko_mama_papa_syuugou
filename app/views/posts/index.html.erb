@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <div class="row">
     <div class="col-4 p-4">
       <h1>新規投稿</h1>
@@ -21,9 +22,10 @@
           <tr>
             <th scope="col"></th>
             <th scope="col">ユーザー画像</th>
-            <th scope="col">ユーザー名</th>
+            <th scope="col">名前</th>
             <th scope="col">投稿画像</th>
             <th scope="col">タイトル</th>
+            <th scope="col">コメント</th>
           </tr>
         </thead>
         <% @posts.each do |post| %>
@@ -42,12 +44,14 @@
                   <%= post.title %>
                 <% end %>
               </td>
+              <td><%= link_to "#{post.post_comments.count}コメント", post_path(post.id) %></td>
             </th>
           </tr>
         </tbody>
         <% end %>
         </table>
-        <%= paginate @posts %>
+
+      <%= paginate @posts %>
     </div>
     </div>
   </div>
