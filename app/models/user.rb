@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   has_many :posts, dependent: :destroy
-  has_many :post_comments, dependent: :destroy
+
   has_one_attached :profile_image
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
@@ -30,15 +30,4 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?","#{word}")
-    elsif search == "partial_match"
-      @user = User.where("name LIKE?","%#{word}%")
-    else
-      @user = User.all
-    end
-  end
-
 end
