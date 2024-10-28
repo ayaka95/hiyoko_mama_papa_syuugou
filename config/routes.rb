@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
   root to: "homes#top"
   devise_for :users
 
@@ -7,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
-  resources :posts, only: [:index, :show, :create, :new, :destroy, :edit, :update]
+  resources :posts, only: [:index, :show, :create, :new, :destroy, :edit, :update] do
+    resources :post_comments, only: [:create]
+  end
 
 
    get 'mypage' => 'users#mypage', as: 'mypage'
