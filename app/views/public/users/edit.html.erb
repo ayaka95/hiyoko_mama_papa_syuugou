@@ -1,10 +1,10 @@
 <div class="container">
   <h2 class="pt-4">プロフィール編集</h2>
   <% if @user.errors.any? %>
-    <%= @user.errors.count %>件のエラーが発生しました。
+    <h3><%= @user.errors.count %>件のエラーが発生しました。</h3>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
-       <li><%= message %></li>
+       <li><h4><%= message %></h4></li>
       <% end %>
     </ul>
   <% end %>
