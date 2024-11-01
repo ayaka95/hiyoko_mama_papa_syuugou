@@ -7,12 +7,12 @@
 
       <%= form_with model: @post do |f| %>
         <h4>タイトル</h4>
-        <%= f.text_field :title, placeholder:"30文字以内"%>
-        <h4>画像</h4>
+        <%= f.text_field :title, placeholder:"30文字以内", class: "w-100" %>
+        <h4 class="pt-3">画像</h4>
         <%= f.file_field :image, accept: "image/*" %>
-        <h4>本文</h4>
-        <%= f.text_area :body, placeholder:"100文字以内"%>
-        <%= f.submit '投稿' %>
+        <h4 class="pt-3">本文</h4>
+        <%= f.text_area :body, placeholder:"100文字以内", class: "w-100" %>
+        <%= f.submit '投稿', class: "btn btn-md btn-success" %>
       <% end %>
     </div>
     <div class="col-8 p-4">

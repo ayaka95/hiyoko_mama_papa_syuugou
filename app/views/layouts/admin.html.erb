@@ -8,14 +8,49 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
-    <% if admin_signed_in? %>
-      <div class="container">
-        <div class="text-right">
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+  <body class="d-flex flex-column vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container border">
+          <div class="row p-4">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+              <% if admin_signed_in? %>
+                <li class="mr-3">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+                </li>
+                <li class="mr-3">
+                  <i class="fa-solid fa-users"></i>
+                  <%= link_to 'ユーザー一覧', admin_dashboards_path %>
+                </li>
+                <li>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <%= link_to 'コメント一覧', admin_post_comments_path %>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    <% end %>
-    <%= yield %>
+      </nav>
+    </header>
+    <main>
+      <% flash.each do |message_type, message| %>
+        <% if message_type == 'notice' %>
+          <div class="container alert alert-success">
+            <%= message %>
+  　　　   　</div>
+　　　　<% else %>
+　　　　  <div class="container alert alert-danger">
+　　　　    <%= message %>
+　　　　  </div>
+　　　　<% end %>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="p-4">コメント一覧</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ユーザー名</th>
+        <th scope="col">コメント</th>
+        <th scope="col">日付</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <% @post_comments.each do |post_comment| %>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <td><%= post_comment.user.name %></td>
+          <td><%= post_comment.comment %></td>
+          <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+          <td>
+            <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class: "btn btn-sm btn-danger" %>
+          </td>
+        </th>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  <%= paginate @post_comments %>
+</div>

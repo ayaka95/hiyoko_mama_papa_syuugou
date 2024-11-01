@@ -11,13 +11,7 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header>
-      <% flash.each do |message_type, message| %>
-        <div>
-          <%= message %>
-        </div>
-      <% end %>
-
+    <header class="background1">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container border">
           <div class="row">
@@ -61,10 +55,22 @@
               </ul>
             </div>
           </div>
+
         </div>
       </nav>
     </header>
-    <main>
+    <main class="p-2">
+      <% flash.each do |message_type, message| %>
+        <% if message_type == 'notice' %>
+          <div class="container alert alert-success">
+            <%= message %>
+  　　　   　</div>
+　　　　<% else %>
+　　　　  <div class="container alert alert-danger">
+　　　　    <%= message %>
+　　　　  </div>
+　　　　<% end %>
+      <% end %>
       <%= yield %>
     </main>
   </body>
