@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="pt-4 ">投稿編集</h1>
+  <%= render 'error', post: @post %>
+
+  <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+    <h4>タイトル</h4>
+    <%= f.text_field :title, class: "w-50" %>
+    <h4 class="pt-3">画像</h4>
+    <%= f.file_field :image, accept: "image/*" %>
+    <h4 class="pt-3">本文</h4>
+    <%= f.text_area :body, class: "w-50" %><br>
+    <%= f.submit '保存', class: "btn btn-md btn-primary" %>
+  <% end %>
+</div>
+

@@ -4,5 +4,13 @@
   background-image: url('../images/top_image.jpg');
   background-size: cover;
   background-position: center;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 10%;
+}
+
+.background1{
+  background-image: url('../images/navbar_image.jpg');
+  background-size: cover;
+  background-position: center;
   background-color: rgba(0,0,0,0.5);
 }

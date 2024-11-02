@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 p-4">
+      <h1>マイページ</h1>
+      <dev class="card">
+        <div class="card-body text-center">
+          <%= image_tag @user.get_profile_image(100,100), class: :"rounded-circle" %>
+          <h4 class="p-2">名前：<%= @user.name %></h4>
+          <p>自己紹介：<%= @user.introduction %></p>
+          <% if @user == current_user %>
+            <% unless @user.guest_user? %>
+              <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+              <p><%= link_to "退会", user_path(current_user.id), method: :delete, "data-confirm" => "退会しますか？" %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </dev>
+    </div>
+
+    <%= render 'users_index', posts: @posts %>
+  </div>
+</div>
