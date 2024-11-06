@@ -14,6 +14,7 @@ end
 olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
   user.name = "Olivia"
   user.password = "password"
+  user.password_confirmation = "password"
   user.introduction = "よろしくお願いします"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
@@ -21,6 +22,7 @@ end
 james = User.find_or_create_by!(email: "james@example.com") do |user|
   user.name = "James"
   user.password = "password"
+  user.password_confirmation = "password"
   user.introduction = "こんにちは"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
 end
@@ -28,6 +30,7 @@ end
 lucas = User.find_or_create_by!(email: "lucas@example.com") do |user|
   user.name = "Lucas"
   user.password = "password"
+  user.password_confirmation = "password"
   user.introduction = "初めまして"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
 end
