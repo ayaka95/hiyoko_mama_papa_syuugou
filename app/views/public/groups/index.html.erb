@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h1>グループ作成</h1>
+      <div class="card">
+        <div class="card-body">
+          <%= form_with model: @group do |f| %>
+            <h4>グループ画像</h4>
+            <%= f.file_field :image, accept: "image/*" %>
+            <h4>グループ名</h4>
+            <%= f.text_field :name, placeholder: "30文字以内" %>
+            <h4>紹介文</h4>
+            <%= f.text_area :introduction, placeholder: "100文字以内" %></br>
+            <%= f.submit "作成する" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <h1>グループ一覧</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">画像</th>
+            <th scope="col">名前</th>
+            <th scope="col">紹介文</th>
+            <th scope="col">メンバー数</th>
+          </tr>
+        </thead>
+        <% @groups.each do |group| %>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <td>画像</td>
+              <td><%= group.name %></td>
+              <td>
+                <%= link_to group_path(group.id) do %>
+                  <% group.introduction %>
+                <% end %>
+              </td>
+              <td>メンバー数</td>
+            </th>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
