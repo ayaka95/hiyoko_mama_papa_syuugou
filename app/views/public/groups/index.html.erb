@@ -1,22 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-4 p-4">
       <h1>グループ作成</h1>
       <div class="card">
         <div class="card-body">
+          <%= render 'error', group: @group %>
           <%= form_with model: @group do |f| %>
             <h4>グループ画像</h4>
             <%= f.file_field :image, accept: "image/*" %>
-            <h4>グループ名</h4>
-            <%= f.text_field :name, placeholder: "30文字以内" %>
-            <h4>紹介文</h4>
-            <%= f.text_area :introduction, placeholder: "100文字以内" %></br>
-            <%= f.submit "作成する" %>
+            <h4 class="pt-4">グループ名</h4>
+            <%= f.text_field :name, placeholder: "30字以内", class: :"w-100" %>
+            <h4 class="pt-4">紹介文</h4>
+            <%= f.text_area :introduction, placeholder: "100文字以内", class: :"w-100" %></br>
+            <%= f.submit "作成する", class: "btn btn-md btn-success" %>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-8 p-4">
       <h1>グループ一覧</h1>
       <table class="table">
         <thead>
@@ -32,19 +33,20 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td>画像</td>
-              <td><%= group.name %></td>
+              <td><%= image_tag group.get_image(60,60) %></td>
               <td>
                 <%= link_to group_path(group.id) do %>
-                  <% group.introduction %>
+                  <%= group.name %>
                 <% end %>
               </td>
+              <td><%= group.introduction %></td>
               <td>メンバー数</td>
             </th>
           </tr>
         </tbody>
         <% end %>
       </table>
+      <%= paginate @groups %>
     </div>
   </div>
 </div>

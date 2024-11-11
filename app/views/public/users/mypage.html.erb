@@ -3,9 +3,9 @@
     <div class="col-4 p-4">
       <h1>マイページ</h1>
       <dev class="card">
-        <div class="card-body text-center">
-          <%= image_tag @user.get_profile_image(100,100), class: :"rounded-circle" %>
-          <h4 class="p-2">名前：<%= @user.name %></h4>
+        <div class="card-body">
+          <p class="text-center rounded-circle"><%= image_tag @user.get_profile_image(100,100) %></p>
+          <h4 class="pt-2">名前：<%= @user.name %></h4>
           <p>自己紹介：<%= @user.introduction %></p>
           <% if @user == current_user %>
             <% unless @user.guest_user? %>
