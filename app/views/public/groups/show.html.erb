@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="p-4">グループ詳細</h1>
+  <div class="row">
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <p class="text-center"><%= image_tag @group.get_image(100,100) %></p>
+        <h4 class="pt-2">名前：<%= @group.name %></h4>
+        <p>紹介文：<%= @group.introduction %></p>
+        <% if @group.is_owned_by?(current_user) %>
+          <%= link_to "編集", edit_group_path(@group.id), class: "btn btn-md btn-success" %>
+        <% end %>
+      </div>
+    </div>
+    <h4 class="pl-5">メンバー一覧</h4>
+  </div>
+</div>
