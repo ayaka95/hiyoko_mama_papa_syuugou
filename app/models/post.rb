@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :body, presence: true, length: { maximum: 100 }
@@ -23,6 +24,10 @@ class Post < ApplicationRecord
     else
       @post = Post.all
     end
+  end
+
+  def favorited_by?(user)
+    favotites.exists?(user_id: user_id)
   end
 
 end
