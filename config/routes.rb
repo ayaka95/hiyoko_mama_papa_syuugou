@@ -19,7 +19,9 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create]
     end
     resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :groups, only: [:new, :index, :create, :show, :edit, :update]
+    resources :groups, only: [:new, :index, :create, :show, :edit, :update, :destroy] do
+      resource :group_user, only: [:create, :destroy]
+    end
 
   end
 
