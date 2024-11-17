@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post 'search' => 'searches#search'
     resources :posts, only: [:index, :show, :create, :new, :destroy, :edit, :update] do
       resources :post_comments, only: [:create]
-      resources :favorites, only: [:index, :create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :groups, only: [:new, :index, :create, :show, :edit, :update, :destroy] do
