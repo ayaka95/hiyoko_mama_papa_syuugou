@@ -5,7 +5,7 @@
       <tr>
         <th scope="col"></th>
         <th scope="col">グループ名</th>
-        <th scope="col">画像</th>
+        <th scope="col">紹介文</th>
         <th scope="col">メンバー数</th>
         <th scope="col"></th>
       </tr>
@@ -15,8 +15,8 @@
       <tr>
         <th scope="row">
           <td><%= group.name %></td>
-          <td><%#= group.get_image(100,100 %></td>
-          <td><%#= group.user.count %></td>
+          <td><%= group.introduction %></td>
+          <td><%= group.users.count %></td>
           <td>
             <%= link_to '削除', admin_group_path(group), method: :delete, "data-confirm" => "グループを削除しますか？", class: "btn btn-sm btn-danger" %>
           </td>
