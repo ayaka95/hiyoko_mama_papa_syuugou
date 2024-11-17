@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'mypage' => 'users#mypage', as: 'mypage'
     post 'search' => 'searches#search'
     resources :posts, only: [:index, :show, :create, :new, :destroy, :edit, :update] do
-      resources :post_comments, only: [:create]
+      resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update, :destroy]

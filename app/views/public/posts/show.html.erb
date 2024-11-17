@@ -33,23 +33,21 @@
       </h4>
     </div>
     <div class="col-5">
-      <div>
-        <h1>コメント</h1>
-        <%= form_with model: [@post, @post_comment], class: "mt-4" do |f| %>
-          <%= f.text_area :comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
-          <%= f.hidden_field :post_id, value: @post.id %></br>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
+      <h1>コメント</h1>
+      <%= form_with model: [@post, @post_comment], class: "mt-4" do |f| %>
+        <%= f.text_area :comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
+        <%= f.hidden_field :post_id, value: @post.id %></br>
+        <%= f.submit "送信する" %>
+      <% end %>
       <h4 class="mt-5"><%= @post.post_comments.count %>件のコメント</h4>
       <table class="table">
         <thead>
           <tr>
             <th scope="col"></th>
             <th scope="col">画像</th>
-            <th scope="col">名前</th>
             <th scope="col">日付</th>
             <th scope="col">コメント</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <% @post.post_comments.each do |post_comment| %>
@@ -57,9 +55,11 @@
           <tr>
             <th scope="row">
               <td><%= image_tag post_comment.user.get_profile_image(60,60), class: :"rounded-circle" %></td>
-              <td><%= post_comment.user.name %></td>
               <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= post_comment.comment %></td>
+              <% if post_comment.user == current_user %>
+                <td><%= link_to "削除", post_post_comment_path(post_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
+              <% end %>
             </th>
           </tr>
         </tbody>
