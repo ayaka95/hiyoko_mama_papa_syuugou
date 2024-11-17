@@ -18,9 +18,12 @@
     </div>
     <div class="col-5 pl-5">
       <h4>メンバー一覧</h4>
+      <ol>
       <% @group.users.each do |user| %>
-        <li><%= user.name %></li>
+        <li class="pt-1"><%= user.name %></li>
       <% end %>
+      </ol>
+      </br><p>※作成者をメンバーとしてカウントします</p>
     </div>
   </div>
 </div>
