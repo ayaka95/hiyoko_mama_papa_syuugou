@@ -83,11 +83,12 @@ end
 
 10.times do |n|
   owner = User.all.sample
-  Group.find_or_create_by!(
+  group = Group.find_or_create_by!(
     name: "test#{n + 1}",
     introduction: "test#{n + 1}",
     owner: owner
     )
+  group.users << owner
 end
 
 

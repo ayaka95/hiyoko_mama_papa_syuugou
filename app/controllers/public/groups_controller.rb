@@ -16,7 +16,7 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     @group.users << current_user
     if @group.save
-      redirect_to groups_path
+      redirect_to group_path(@group.id)
     else
       render 'index'
     end
