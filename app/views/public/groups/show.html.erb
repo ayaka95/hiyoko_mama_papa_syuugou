@@ -12,5 +12,8 @@
       </div>
     </div>
     <h4 class="pl-5">メンバー一覧</h4>
+    <% @group.users.each do |user| %>
+      <li><%= user.name %></li>
+    <% end %>
   </div>
 </div>
