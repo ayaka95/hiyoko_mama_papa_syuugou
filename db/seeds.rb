@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 require 'dotenv/load'
 
 Admin.find_or_create_by!(email: "admin@example.com") do |admin|
@@ -72,5 +73,23 @@ Post.find do |post|
     comment.user = olivia
     comment.post = Post.find_by(title: "砂遊び")
   end
-
 end
+
+users = User.all
+
+users.each do |user|
+  random_post = Post.all.sample
+  Favorite.create(user: user, post: random_post)
+end
+
+10.times do |n|
+  owner = User.all.sample
+  group = Group.find_or_create_by!(
+    name: "test#{n + 1}",
+    introduction: "test#{n + 1}",
+    owner: owner
+    )
+  group.users << owner
+end
+
+

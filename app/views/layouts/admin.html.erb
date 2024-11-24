@@ -27,9 +27,13 @@
                   <i class="fa-solid fa-users"></i>
                   <%= link_to 'ユーザー一覧', admin_dashboards_path %>
                 </li>
-                <li>
+                <li class="mr-3">
                   <i class="fa-solid fa-pen-to-square"></i>
                   <%= link_to 'コメント一覧', admin_post_comments_path %>
+                </li>
+                <li>
+                  <i class="fa-solid fa-people-roof"></i>
+                  <%= link_to 'グループ一覧', admin_groups_path %>
                 </li>
               <% end %>
               </ul>

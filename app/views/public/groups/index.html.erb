@@ -40,12 +40,13 @@
                 <% end %>
               </td>
               <td><%= group.introduction %></td>
-              <td>メンバー数</td>
+              <td><%= group.group_users.count %>メンバー</td>
             </th>
           </tr>
         </tbody>
         <% end %>
       </table>
+      <p>※作成者をメンバーとしてカウントします</p>
       <%= paginate @groups %>
     </div>
   </div>

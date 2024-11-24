@@ -1,7 +1,7 @@
 <div class="container">
   <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <div class="row">
-    <div class="col-4 p-4">
+    <div class="col-4 pt-4">
       <h1>新規投稿</h1>
       <div class="card">
         <div class="card-body">
@@ -18,16 +18,17 @@
         </div>
       </div>
     </div>
-    <div class="col-8 p-4">
+    <div class="col-8 pt-4">
       <h1>投稿一覧</h1>
       <table class="table">
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">ユーザー画像</th>
-            <th scope="col">名前</th>
-            <th scope="col">投稿画像</th>
+            <th scope="col">ユーザー</th>
+            <th scope="col"></th>
+            <th scope="col">画像</th>
             <th scope="col">タイトル</th>
+            <th scope="col"></th>
             <th scope="col">コメント</th>
           </tr>
         </thead>
@@ -35,7 +36,7 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag post.user.get_profile_image(100,100), class: :"rounded-circle" %></td>
+              <td><%= image_tag post.user.get_profile_image(60,60), class: :"rounded-circle" %></td>
               <td>
                 <%= link_to user_path(post.user.id) do %>
                   <%= post.user.name %>
@@ -47,7 +48,20 @@
                   <%= post.title %>
                 <% end %>
               </td>
-              <td><%= link_to "#{post.post_comments.count}コメント", post_path(post.id) %></td>
+              <% if post.favorited_by?(current_user) %>
+              <td>
+                <%= link_to post_favorite_path(post), method: :delete do %>
+                  ❤️x<%= post.favorites.count %>
+                <% end %>
+              </td>
+              <% else %>
+              <td>
+                <%= link_to post_favorite_path(post), method: :post do %>
+                  ♡x<%= post.favorites.count %>
+                <% end %>
+              </td>
+              <% end %>
+              <td><%= link_to "#{post.post_comments.count}", post_path(post.id) %></td>
             </th>
           </tr>
         </tbody>
