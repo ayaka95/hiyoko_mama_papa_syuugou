@@ -45,17 +45,17 @@ class Public::GroupsController < ApplicationController
     redirect_to groups_path
   end
 
-    private
+  private
 
-    def group_params
-      params.require(:group).permit(:name, :introduction, :image)
-    end
+  def group_params
+    params.require(:group).permit(:name, :introduction, :image)
+  end
 
-    def is_matching_login_user
+  def is_matching_login_user
     @group = Group.find(params[:id])
     unless @group.owner.id == current_user.id
       redirect_to groups_path
     end
-    end
+  end
 
 end
