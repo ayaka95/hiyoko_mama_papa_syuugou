@@ -66,14 +66,14 @@
     <main class="p-2">
       <% flash.each do |message_type, message| %>
         <% if message_type == 'notice' %>
-          <div class="container alert alert-success">
-            <%= message %>
-  　　　   </div>
-　　　　  <% else %>
-　　　　    <div class="container alert alert-danger">
-　　　　      <%= message %>
-　　　　    </div>
-　　　　  <% end %>
+        <div class="container alert alert-success">
+          <%= message %>
+        </div>
+        <% else %>
+        <div class="container alert alert-danger">
+          <%= message %>
+        </div>
+        <% end %>
       <% end %>
       <%= yield %>
     </main>
