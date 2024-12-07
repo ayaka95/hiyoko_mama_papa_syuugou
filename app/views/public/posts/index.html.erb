@@ -48,13 +48,13 @@
                   <%= post.title %>
                 <% end %>
               </td>
-              <% if post.favorited_by?(current_user) %>
+              <% if post.favorited_by?(current_user) && post.user != current_user %>
               <td>
                 <%= link_to post_favorite_path(post), method: :delete do %>
                   ❤️x<%= post.favorites.count %>
                 <% end %>
               </td>
-              <% else %>
+              <% elsif post.user != current_user %>
               <td>
                 <%= link_to post_favorite_path(post), method: :post do %>
                   ♡x<%= post.favorites.count %>
