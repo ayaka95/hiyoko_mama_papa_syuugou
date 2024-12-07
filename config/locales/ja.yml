@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザー名
+        introduction: 自己紹介
+      post:
+        title: タイトル
+        body: 本文
+      post_comment:
+        post_comment: コメント
+      group:
+        name: グループ名
+        introduction: 紹介文
+      
