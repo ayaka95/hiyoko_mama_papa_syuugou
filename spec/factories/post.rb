@@ -5,5 +5,6 @@ FactoryBot.define do
     user_id { Faker::Number.non_zero_digit }
     updated_at { DateTime.now }
     created_at { DateTime.now }
+    user
   end
 end
