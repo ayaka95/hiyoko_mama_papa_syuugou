@@ -25,14 +25,16 @@ describe '投稿のテスト' do
       end
     end
     context '投稿処理のテスト' do
-      it '投稿後のリダイレクト先は正しいか' do
+      before do
         fill_in 'post_title', with: Faker::Lorem.characters(number:10)
         fill_in 'post_body', with: Faker::Lorem.characters(number:50)
+      end
+      it '投稿が正しく保存されるか' do
+        expect{ click_button '投稿' }.to change(user.posts, :count).by(1)
+      end
+      it 'リダイレクト先が、投稿の詳細画面になっている' do
         click_button '投稿'
         expect(page).to have_current_path post_path(Post.last)
-      end
-      it '自分の新しい投稿が正しく保存される' do
-        expect{ post.create }.to change(Post, :count).by(1)
       end
     end
     context '投稿が失敗した時' do
@@ -62,7 +64,7 @@ describe '投稿のテスト' do
     end
     context '削除が成功した時' do
       it '削除後のリダイレクト先が正しいか' do
-        click_button '削除'
+        click_link '削除'
         expect(page).to have_current_path mypage_path
       end
       it '削除されるか' do
