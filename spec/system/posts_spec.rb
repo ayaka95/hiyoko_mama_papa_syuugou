@@ -110,10 +110,4 @@ describe '投稿のテスト' do
       end
     end
   end
-
-  describe 'アクセス制限のテスト' do
-    before do
-      delete logout_path
-    end
-    context 'ログインユーザー以外が投稿'
 end
