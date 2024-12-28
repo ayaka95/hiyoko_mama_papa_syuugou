@@ -51,17 +51,17 @@ describe '投稿のテスト' do
       fill_in 'post_title', with: Faker::Lorem.characters(number:10)
       fill_in 'post_body', with: Faker::Lorem.characters(number:50)
       click_button '投稿'
-      visit post_path(Post.last)
+      visit post_path(post)
     end
     context '表示の確認' do
       it 'post_pathが"/posts/:id"であるか' do
-        expect(current_path).to eq'/posts/' + Post.last.id.to_s
+        expect(current_path).to eq'/posts/' + post.id.to_s
       end
       it '編集リンクが表示されているか' do
-        expect(page).to have_link "編集", href: edit_post_path(Post.last)
+        expect(page).to have_link "編集", href: edit_post_path(post)
       end
       it '削除リンクが表示されているか' do
-        expect(page).to have_link "削除", href: post_path(Post.last)
+        expect(page).to have_link "削除", href: post_path(post)
       end
     end
     context '削除が成功した時' do
@@ -77,15 +77,15 @@ describe '投稿のテスト' do
 
   describe '編集画面のテスト' do
     before do
-      visit edit_post_path(Post.last)
+      visit edit_post_path(post)
     end
     context '表示の確認' do
       it 'edit_post_pathが"/posts/:id/edit"であるか' do
-        expect(current_path).to eq'/posts/' + Post.last.id.to_s + '/edit'
+        expect(current_path).to eq'/posts/' + post.id.to_s + '/edit'
       end
       it '編集前のタイトルと本文がフォームにセットされているか' do
-        expect(page).to have_field 'post_title', with: Post.last.title
-        expect(page).to have_field 'post_body', with: Post.last.body
+        expect(page).to have_field 'post_title', with: post.title
+        expect(page).to have_field 'post_body', with: post.body
       end
       it '保存ボタンが表示されている' do
         expect(page).to have_button '保存'
@@ -110,4 +110,10 @@ describe '投稿のテスト' do
       end
     end
   end
+
+  describe 'アクセス制限のテスト' do
+    before do
+      delete logout_path
+    end
+    context 'ログインユーザー以外が投稿'
 end
