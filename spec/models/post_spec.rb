@@ -35,3 +35,11 @@ describe 'バリデーションのテスト' do
     end
   end
 end
+
+describe 'アソシエーションのテスト' do
+  context 'userモデルとの関係' do
+    it 'N:1になっている' do
+      expect(Post.reflect_on_association(:user).macro).to eq :belongs_to
+    end
+  end
+end
