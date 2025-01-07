@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-7">
+    <div class="col-md-7">
       <h1>投稿詳細</h1>
       <div class="card  mx-auto mt-4 shadow-lg">
         <div class="row mx-4">
@@ -32,7 +32,7 @@
         <% end %>
       </h4>
     </div>
-    <div class="col-5">
+    <div class="col-md-5">
       <h1>コメント</h1>
       <%= form_with model: [@post, @post_comment], class: "mt-4" do |f| %>
         <%= f.text_area :comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>

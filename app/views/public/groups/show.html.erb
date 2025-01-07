@@ -1,9 +1,9 @@
 <div class="container">
   <h1 class="p-4">グループ詳細</h1>
   <div class="row">
-    <div class="card" style="width: 20rem;">
+    <div class="card w-50">
       <div class="card-body">
-        <p class="text-center"><%= image_tag @group.get_image(100,100) %></p>
+        <p class="text-center"><%= image_tag @group.get_image(100,100), class: :"rounded-circle" %></p>
         <h4 class="pt-2">名前：<%= @group.name %></h4>
         <p>紹介文：<%= @group.introduction %></p>
         <% if @group.is_owned_by?(current_user) %>
