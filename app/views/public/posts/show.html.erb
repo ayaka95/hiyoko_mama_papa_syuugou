@@ -4,7 +4,7 @@
       <h1>投稿詳細</h1>
       <div class="card  mx-auto mt-4 shadow-lg">
         <div class="row mx-4">
-          <p class="mt-4"><%= image_tag @post.user.get_profile_image(60,60), class: :"rounded-circle" %></p>
+          <p class="mt-4"><%= image_tag @post.user.get_profile_image(60,60), class: "rounded-circle" %></p>
           <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
         </div>
         <p class="mx-auto"><%= image_tag @post.get_image(400,400) %></p>
@@ -54,7 +54,7 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag post_comment.user.get_profile_image(60,60), class: :"rounded-circle" %></td>
+              <td><%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %></td>
               <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= post_comment.comment %></td>
               <% if post_comment.user == current_user %>
