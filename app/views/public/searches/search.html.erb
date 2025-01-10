@@ -1,6 +1,6 @@
-<div class="container-md">
+<div class="container">
   <% if @range == "投稿" %>
-  <h1 class="p-4">"<%= @word %>"の検索結果</h1>
+  <h1 class="p-4">"<%= @word %>"の投稿検索結果</h1>
   <% @posts.each do |post| %>
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="row mx-4">
@@ -19,7 +19,7 @@
   <% end %>
 
   <% if @range == "ユーザー" %>
-    <h1 class="p-4">"<%= @word %>"の検索結果</h1>
+    <h1 class="p-4">"<%= @word %>"のユーザー検索結果</h1>
     <% @users.each do |user| %>
       <div class="card w-50 mx-auto mt-4 shadow-lg">
         <div class="card-body">
@@ -27,7 +27,8 @@
           <%= link_to user_path(user.id), class: "p-4" do %>
             <%= user.name %>
           <% end %>
-          <p class="pl-4">紹介文：<%= user.introduction %><p>
+          <p class="pl-4">自己紹介文：<%= user.introduction %><p>
+          <P class="pl-4">投稿数：<%= user.posts.count %></p>
         </div>
       </div>
     <% end %>

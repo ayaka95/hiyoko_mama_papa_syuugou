@@ -5,7 +5,9 @@
       <div class="card  mx-auto mt-4 shadow-lg">
         <div class="row mx-4">
           <p class="mt-4"><%= image_tag @post.user.get_profile_image(60,60), class: "rounded-circle" %></p>
-          <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
+          <%= link_to user_path(@post.user.id) do %>
+            <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
+          <% end %>
         </div>
         <p class="mx-auto"><%= image_tag @post.get_image(400,400) %></p>
         <% if @post.favorited_by?(current_user) && @post.user != current_user %>
@@ -21,7 +23,10 @@
             <% end %>
           </p>
         <% end %>
-        <h4 class="mx-4">タイトル: <%= @post.title %></h4>
+        <% if @post.user == current_user %>
+          <strong class="m-4">❤️✖️<%= @post.favorites.count %></strong>
+        <% end %>
+        <p class="mx-4">タイトル: <%= @post.title %></p>
         <p class="mx-4">本文:<%= @post.body %></p>
       </div>
       <h4>
@@ -43,8 +48,8 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">画像</th>
-            <th scope="col">日付</th>
+            <th scope="col">ユーザー</th>
+            <th scope="col"></th>
             <th scope="col">コメント</th>
             <th scope="col"></th>
           </tr>

@@ -1,31 +1,18 @@
 <div class="container">
   <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <h1 class="p-4">ユーザー一覧</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">ユーザー画像</th>
-        <th scope="col">名前</th>
-        <th scope="col">自己紹介文</th></th>
-      </tr>
-    </thead>
-    <% @users.each do |user| %>
-    <tbody>
-      <tr>
-        <th scope="row">
-          <td><%= image_tag user.get_profile_image(100,100), class: :"rounded-circle" %></td>
-          <td>
-            <%= link_to user_path(user.id) do %>
-              <h4><%= user.name %></h4>
-            <% end %>
-          </td>
-          <td><%= user.introduction %></td>
-        </th>
-      </tr>
-    </tbody>
-    <% end %>
-  </table>
+  <% @users.each do |user| %>
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
+      <div class="card-body">
+        <p class="text-center"><%= image_tag user.get_profile_image(200,200), class: 'rounded-circle' %></p>
+        <%= link_to user_path(user.id), class: "p-4" do %>
+          <%= user.name %>
+        <% end %>
+        <p class="pl-4">自己紹介文：<%= user.introduction %><p>
+        <P class="pl-4">投稿数：<%= user.posts.count %></p>
+      </div>
+    </div>
+  <% end %>
   <%= paginate @users %>
 </div>
 

@@ -60,7 +60,7 @@
         </div>
       </nav>
     </header>
-    <main class="p-md-2">
+    <main class="mb-auto p-2">
       <% flash.each do |message_type, message| %>
         <% if message_type == 'notice' %>
         <div class="container alert alert-success">
@@ -74,5 +74,8 @@
       <% end %>
       <%= yield %>
     </main>
+    <footer class="background1">
+      <p class="p-4 text-center text-dark">新米ママパパのためのコミュニティサイト</p>
+    </footer>      
   </body>
 </html>
