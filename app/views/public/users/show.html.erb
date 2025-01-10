@@ -1,14 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-4 p-4">
+    <div class="col-md-4 p-4">
       <h1>ユーザー詳細</h1>
-      <div class="card">
-        <div class="card-body text-center">
-          <%= image_tag @user.get_profile_image(100,100), class: :"rounded-circle" %>
-          <h3 class="p-2"><%= @user.name %></h3>
-          <%= @user.introduction %>
-        </div>
-      </div>
+      <%= render 'users_info', user: @user %>
     </div>
     <%= render 'users_index', posts: @posts %>
   </div>

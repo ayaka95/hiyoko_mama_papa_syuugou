@@ -13,57 +13,54 @@
   <body class="d-flex flex-column vh-100">
     <header class="background1">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container border">
-          <div class="row">
-            <a class="navbar-brand p-3" href="/"><%= image_tag('animal_mark_hiyoko.png') %></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <% if user_signed_in? %>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <%= link_to "マイページ", mypage_path %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <%= link_to "投稿一覧", posts_path %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-users"></i>
-                    <%= link_to "ユーザー一覧", users_path %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-people-roof"></i>
-                    <%= link_to "グループ一覧", groups_path %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-                  </li>
-                <% else %>
-                   <li class="mr-3">
-                     <i class="fa-solid fa-masks-theater"></i>
-                    <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <%= link_to "新規登録", new_user_registration_path %>
-                  </li>
-                  <li class="mr-3">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    <%= link_to "ログイン", new_user_session_path %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
+        <div class="container">
+          <a class="navbar-brand" href="/"><%= image_tag('animal_mark_hiyoko.png') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="mx-3">
+                <i class="fa-solid fa-circle-user"></i>
+                <%= link_to "マイページ", mypage_path, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <%= link_to "投稿一覧", posts_path, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-users"></i>
+                <%= link_to "ユーザー一覧", users_path, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-people-roof"></i>
+                <%= link_to "グループ一覧", groups_path, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-dark' %>
+              </li>
+            <% else %>
+              <li class="mx-3">
+                <i class="fa-solid fa-masks-theater"></i>
+                <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-user-plus"></i>
+                <%= link_to "新規登録", new_user_registration_path, class: 'text-dark' %>
+              </li>
+              <li class="mx-3">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <%= link_to "ログイン", new_user_session_path, class: 'text-dark' %>
+              </li>
+            <% end %>
+            </ul>
           </div>
-
         </div>
       </nav>
     </header>
-    <main class="p-2">
+    <main class="mb-auto p-2">
       <% flash.each do |message_type, message| %>
         <% if message_type == 'notice' %>
         <div class="container alert alert-success">
@@ -77,5 +74,8 @@
       <% end %>
       <%= yield %>
     </main>
+    <footer class="background1">
+      <p class="p-4 text-center text-dark">新米ママパパのためのコミュニティサイト</p>
+    </footer>      
   </body>
 </html>

@@ -1,11 +1,10 @@
 <div class="container">
   <div class="p-2">
   <%= form_with url: search_path, local: true, method: :post do |f| %>
-    <i class="mr-2 fa-solid fa-magnifying-glass"></i>
-    <%= f.text_field :word, placeholder: "検索ワード" %>
-    <%= f.select :range, options_for_select([['ユーザー'], ['投稿']]) %>
-    <%= f.select :search, options_for_select({"完全一致" => "perfect_match", "部分一致" => "partial_match"}) %>
     <%= f.submit '検索', class: "btn btn-sm btn-primary" %>
+    <%= f.text_field :word, placeholder: "名前、タイトル、他", class: "w-50 pb-1" %>
+    <%= f.select :range, options_for_select([['ユーザー'], ['投稿']]), class: "w-50" %>
+    <%= f.select :search, options_for_select({"完全一致" => "perfect_match", "部分一致" => "partial_match"}) %>
   <% end %>
   </div>
 </div>

@@ -1,14 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-7">
+    <div class="col-md-7">
       <h1>投稿詳細</h1>
       <div class="card  mx-auto mt-4 shadow-lg">
         <div class="row mx-4">
-          <p class="mt-4"><%= image_tag @post.user.get_profile_image(60,60), class: :"rounded-circle" %></p>
-          <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
+          <p class="mt-4"><%= image_tag @post.user.get_profile_image(60,60), class: "rounded-circle" %></p>
+          <%= link_to user_path(@post.user.id) do %>
+            <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
+          <% end %>
         </div>
         <p class="mx-auto"><%= image_tag @post.get_image(400,400) %></p>
-        <!--投稿画像のサイズが画面幅に対応しない。モデルで高さと幅の引数を指定したせい？-->
         <% if @post.favorited_by?(current_user) && @post.user != current_user %>
           <p class="mx-4">
             <%= link_to post_favorite_path(@post), method: :delete do %>
@@ -22,7 +23,10 @@
             <% end %>
           </p>
         <% end %>
-        <h4 class="mx-4">タイトル: <%= @post.title %></h4>
+        <% if @post.user == current_user %>
+          <strong class="m-4">❤️✖️<%= @post.favorites.count %></strong>
+        <% end %>
+        <p class="mx-4">タイトル: <%= @post.title %></p>
         <p class="mx-4">本文:<%= @post.body %></p>
       </div>
       <h4>
@@ -32,7 +36,7 @@
         <% end %>
       </h4>
     </div>
-    <div class="col-5">
+    <div class="col-md-5">
       <h1>コメント</h1>
       <%= form_with model: [@post, @post_comment], class: "mt-4" do |f| %>
         <%= f.text_area :comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
@@ -44,8 +48,8 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">画像</th>
-            <th scope="col">日付</th>
+            <th scope="col">ユーザー</th>
+            <th scope="col"></th>
             <th scope="col">コメント</th>
             <th scope="col"></th>
           </tr>
@@ -54,7 +58,7 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag post_comment.user.get_profile_image(60,60), class: :"rounded-circle" %></td>
+              <td><%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %></td>
               <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= post_comment.comment %></td>
               <% if post_comment.user == current_user %>

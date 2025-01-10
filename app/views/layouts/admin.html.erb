@@ -47,12 +47,12 @@
         <% if message_type == 'notice' %>
           <div class="container alert alert-success">
             <%= message %>
-  　　　   　</div>
-　　　　<% else %>
-　　　　  <div class="container alert alert-danger">
-　　　　    <%= message %>
-　　　　  </div>
-　　　　<% end %>
+          </div>
+        <% else %>
+          <div class="container alert alert-danger">
+            <%= message %>
+          </div>
+        <% end %>
       <% end %>
       <%= yield %>
     </main>

@@ -1,7 +1,7 @@
 <div class="container">
   <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <div class="row">
-    <div class="col-4 pt-4">
+    <div class="col-md-4 pt-4">
       <h1>新規投稿</h1>
       <div class="card">
         <div class="card-body">
@@ -18,32 +18,30 @@
         </div>
       </div>
     </div>
-    <div class="col-8 pt-4">
+    <div class="col-md-8 pt-4">
       <h1>投稿一覧</h1>
       <table class="table">
         <thead>
-          <tr>
+          <tr class="text-cente">
             <th scope="col"></th>
             <th scope="col">ユーザー</th>
+            <th scope="col">投稿</th>
             <th scope="col"></th>
-            <th scope="col">画像</th>
-            <th scope="col">タイトル</th>
-            <th scope="col"></th>
-            <th scope="col">コメント</th>
+            <th scope="col">コメント数</th>
           </tr>
         </thead>
         <% @posts.each do |post| %>
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag post.user.get_profile_image(60,60), class: :"rounded-circle" %></td>
               <td>
+                <%= image_tag post.user.get_profile_image(60,60), class: "rounded-circle" %></br>
                 <%= link_to user_path(post.user.id) do %>
                   <%= post.user.name %>
                 <% end %>
               </td>
-              <td><%= image_tag post.get_image(100,100) %></td>
               <td>
+                <%= image_tag post.get_image(100,100) %></br>
                 <%= link_to post_path(post.id) do %>
                   <%= post.title %>
                 <% end %>
@@ -58,15 +56,17 @@
                   ♡x<%= post.favorites.count %>
                 <% end %>
               <% end %>
+              <% if post.user == current_user %>
+                ❤️x<%= post.favorites.count %>
+              <% end %>
               </td>
-              <td><%= link_to "#{post.post_comments.count}", post_path(post.id) %></td>
+              <td class="text-center"><%= link_to "#{post.post_comments.count}", post_path(post.id) %></td>
             </th>
           </tr>
         </tbody>
         <% end %>
-        </table>
-        <%= paginate @posts %>
-      </div>
+      </table>
+    <%= paginate @posts %>
     </div>
   </div>
 </div>

@@ -8,10 +8,10 @@ class Group < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :introduction, presence: true, length: { maximum: 100 }
 
-  def get_image(width, height)
+  def get_group_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      image.attach(io: File.open(file_path), filename: 'default-group-image.jpg', content_type: 'image/jpeg')
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
