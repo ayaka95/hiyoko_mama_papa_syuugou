@@ -103,10 +103,6 @@ describe '新規登録画面のテスト' do
     end
     it '新規登録に失敗し、新規登録画面にリダイレクトするか' do
       expect(current_path).to eq'/users'
-      #新規登録失敗後のリダイレクト画面要修正
-      #エラーメッセージと入力フォーム諸々のレイアウト崩れてる
-      #エラーメッセージはviews/public/shared/_error_messages.html.erbから来ているようだが、修正反映されない
-      #上記の根拠は、id="error_explanation"
     end
   end
 end
