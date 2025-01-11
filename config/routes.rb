@@ -23,7 +23,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :groups, only: [:new, :index, :create, :show, :edit, :update, :destroy] do
       resource :group_user, only: [:create, :destroy]
+      
     end
+    resources :group_posts, only: [:new, :create, :show]
 
   end
 

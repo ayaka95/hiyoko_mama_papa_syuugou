@@ -1,21 +1,18 @@
 <div class="container">
   <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <div class="row">
-    <div class="col-md-4 pt-4">
-      <h1>新規投稿</h1>
-      <div class="card">
-        <div class="card-body">
-          <%= render 'error', post: @post %>
-          <%= form_with model: @post do |f| %>
-            <h4>タイトル</h4>
-            <%= f.text_field :title, placeholder:"30文字以内", class: "w-100" %>
-            <h4 class="pt-3">画像</h4>
-            <%= f.file_field :image, accept: "image/*" %>
-            <h4 class="pt-3">本文</h4>
-            <%= f.text_area :body, placeholder:"100文字以内", class: "w-100" %>
-            <%= f.submit '投稿', class: "btn btn-md btn-success" %>
-          <% end %>
-        </div>
+    <div class="col-md-4 col-sm-8 mx-2 mx-sm-auto shadow-lg rounded px-0 my-4">
+      <h5 class="text-dark bg-light p-4 mb-0">新規投稿</h5>
+      <div class="form-body p-4">
+        <%= form_with model: @post do |f| %>
+          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <div class="input-group mb-3 mt-4">
+            <%= f.text_field :title, class: "form-control", placeholder: "タイトル：30文字以内" %>
+          </div>
+          <%= f.text_area :body, class: "form-control", rows: "3", placeholder: "本文：100文字以内" %>
+          <hr>
+          <%= f.submit '作成', class: "btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-8 pt-4">
