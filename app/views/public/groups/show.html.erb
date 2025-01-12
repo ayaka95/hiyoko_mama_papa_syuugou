@@ -1,34 +1,39 @@
 <div class="container">
   <h1 class="p-4">グループ詳細</h1>
-  <%= link_to new_group_group_post_path(@group) do %>
-    <p>グループ投稿</p>
-  <% end %>
   <div class="row">
-    <div class="card w-50">
-      <div class="card-body">
-        <p class="text-center"><%= image_tag @group.get_group_image(300,300), class: "rounded-circle" %></p>
-        <h4 class="pt-2">名前：<%= @group.name %></h4>
-        <p>紹介文：<%= @group.introduction %></p>
-        <% if @group.is_owned_by?(current_user) %>
-          <%= link_to edit_group_path(@group.id), class: "btn btn-outline-secondary btn-block" do %>
-            <i class="fa-solid fa-users-gear"></i>
-          <% end %>
-          <p class="pt-2"><%= link_to "削除", group_path(@group.id), method: :delete, "data-confirm" => "グループを削除しますか？", class: "btn btn-sm btn-danger" %></p>
-        <% elsif @group.include_user?(current_user) %>
-          <%= link_to "グループを退会", group_group_user_path(@group.id), method: :delete, class: "btn btn-md btn-danger" %>
-        <% else %>
-          <%= link_to "グループに参加", group_group_user_path(@group.id), method: :post, class: "btn btn-md btn-success" %>
-        <% end %>
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <p class="text-center"><%= image_tag @group.get_group_image(300,300), class: "rounded-circle" %></p>
+          <div class="row">
+            <div class="col-md p-4">
+              <p>グループ名：<%= @group.name %></p>
+              <p>紹介文：<%= @group.introduction %></p>
+              <% if @group.is_owned_by?(current_user) %>
+                <%= link_to edit_group_path(@group.id), class: "btn btn-outline-secondary btn-block" do %>
+                  <i class="fa-solid fa-users-gear"></i>
+                <% end %>
+                <p class="pt-2"><%= link_to "削除", group_path(@group.id), method: :delete, "data-confirm" => "グループを削除しますか？", class: "btn btn-sm btn-danger" %></p>
+              <% elsif @group.include_user?(current_user) %>
+                <%= link_to "グループ投稿", group_group_posts_path(@group), class: "btn btn-md btn-block btn-info" %>
+                <%= link_to "グループを退会", group_group_user_path(@group.id), method: :delete, class: "btn btn-md btn-block btn-danger" %>
+              <% else %>
+                <%= link_to "グループに参加", group_group_user_path(@group.id), method: :post, class: "btn btn-md btn-block btn-success" %>
+              <% end %>
+            </div>
+            <div class="col-md p-4">
+              <p>メンバー一覧</p>
+              <ol>
+              <% @group.users.each do |user| %>
+                <li class="pt-1"><%= user.name %></li>
+              <% end %>
+              </ol>
+              </br><p>※作成者をメンバーとしてカウントします</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-5 pl-5">
-      <h4>メンバー一覧</h4>
-      <ol>
-      <% @group.users.each do |user| %>
-        <li class="pt-1"><%= user.name %></li>
-      <% end %>
-      </ol>
-      </br><p>※作成者をメンバーとしてカウントします</p>
-    </div>
+      
   </div>
 </div>
