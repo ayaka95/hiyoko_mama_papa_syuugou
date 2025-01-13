@@ -7,9 +7,9 @@
         <%= form_with model: @group do |f| %>
           <%= f.file_field :image, accept: "image/*", class: "w-100" %>
           <div class="input-group mb-3 mt-4">
-            <%= f.text_field :name, class: "form-control", placeholder: "30文字以内" %>
+            <%= f.text_field :name, class: "form-control", placeholder: "グループ名：30文字以内" %>
           </div>
-          <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "100文字以内" %>
+          <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "紹介文：100文字以内" %>
           <hr>
           <%= f.submit '更新', class: "btn btn-lg btn-block btn-info mt-4" %>
         <% end %>

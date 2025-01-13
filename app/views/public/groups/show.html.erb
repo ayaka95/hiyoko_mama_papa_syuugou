@@ -13,7 +13,8 @@
                 <%= link_to edit_group_path(@group.id), class: "btn btn-outline-secondary btn-block" do %>
                   <i class="fa-solid fa-users-gear"></i>
                 <% end %>
-                <p class="pt-2"><%= link_to "削除", group_path(@group.id), method: :delete, "data-confirm" => "グループを削除しますか？", class: "btn btn-sm btn-danger" %></p>
+                <%= link_to "グループ投稿", group_group_posts_path(@group), class: "btn btn-md btn-block btn-info" %>
+                <p class="pt-2"><%= link_to "削除", group_path(@group.id), method: :delete, "data-confirm" => "グループを削除しますか？", class: "btn btn-sm btn-block btn-danger" %></p>
               <% elsif @group.include_user?(current_user) %>
                 <%= link_to "グループ投稿", group_group_posts_path(@group), class: "btn btn-md btn-block btn-info" %>
                 <%= link_to "グループを退会", group_group_user_path(@group.id), method: :delete, class: "btn btn-md btn-block btn-danger" %>

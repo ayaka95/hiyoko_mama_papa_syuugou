@@ -1,17 +1,19 @@
 <div class="container">
-  <div class="col-md">
-    <h1 class="pt-4">投稿編集</h1>
-    <%= render 'error', post: @post %>
-
-    <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
-      <h4>タイトル</h4>
-      <%= f.text_field :title, class: "w-50" %>
-      <h4 class="pt-3">画像</h4>
-      <%= f.file_field :image, accept: "image/*" %>
-      <h4 class="pt-3">本文</h4>
-      <%= f.text_area :body, class: "w-50" %><br>
-      <%= f.submit '保存', class: "btn btn-md btn-block btn-primary" %>
-    <% end %>
-  </div>
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-3">
+      <h5 class="text-dark bg-light p-4 mb-0">投稿編集</h5>
+      <div class="form-body p-4">
+        <%= render 'error', post: @post %>
+        <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <div class="input-group mb-3 mt-4">
+            <%= f.text_field :title, class: "form-control", placeholder: "タイトル：30文字以内" %>
+          </div>
+          <%= f.text_area :body, class: "form-control", rows: "3", placeholder: "本文：100文字以内" %>
+          <hr>
+          <%= f.submit '更新', class: "btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
+    </div>
 </div>
 
