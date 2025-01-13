@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>グループ投稿詳細</h1>
+      <%= link_to "グループ投稿一覧", group_group_posts_path(@group_post.group) %>
+      <div class="card  mx-auto mt-4 shadow-lg">
+        <div class="row mx-4">
+          <p class="mt-4"><%= image_tag @group_post.group_user.get_profile_image(60,60), class: "rounded-circle" %></p>
+          <%= link_to user_path(@group_post.group_user.user.id) do %>
+            <h4 class="ml-3 mt-5"><%= @group_post.group_user.user.name %></h4>
+          <% end %>
+        </div>
+        <p class="mx-auto"><%= image_tag @group_post.get_group_post_image(400,400) %></p>
+        <p class="mx-4">タイトル: <%= @group_post.title %></p>
+        <p class="mx-4">本文:<%= @group_post.body %></p>
+      </div>
+      <div class="row">
+        <div class="col-md p-3">
+          <%= link_to "削除", group_group_post_path(group_id: @group_post.group_id, id: @group_post), method: :delete, "data-confirm" => "投稿を削除しますか？", class: "btn btn-md btn-block btn-danger" %>
+        </div>
+        <div class="col-md p-3">
+          <%= link_to "編集", edit_group_group_post_path(group_id: @group_post.group_id, id: @group_post), class: "btn btn-md btn-block btn-info" %>
+    </div>
+  </div>
+</div>
