@@ -7,7 +7,8 @@ class Public::GroupPostsController < ApplicationController
   
   def index
     @group_post = GroupPost.new
-    @group_posts = GroupPost.page(params[:page])
+    @group = Group.find(params[:group_id])
+    @group_posts = @group.group_posts.page(params[:page])
   end
 
   def create
@@ -19,6 +20,7 @@ class Public::GroupPostsController < ApplicationController
     if @group_post.save
       redirect_to group_group_post_path(group_id: @group.id, id: @group_post)
     else
+      @group_posts = @group.group_posts.page(params[:page])
       render :index
     end
   end
@@ -54,8 +56,10 @@ class Public::GroupPostsController < ApplicationController
 
   def is_matching_login_user
     @group_post = GroupPost.find(params[:id])
-    unless @group_post.user_id == current_user.id
-      redirect_to post_path
+    @group = Group.find(params[:group_id])
+    @group_user = GroupUser.find_by(group_id: @group, user_id: current_user.id)
+    unless @group_post.group_user_id == @group_user.id
+      redirect_to group_group_post_path(group_id: @group_post.group.id, id: @group_post)
     end
   end
 
