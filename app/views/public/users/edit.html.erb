@@ -1,23 +1,28 @@
 <div class="container">
-  <h1 class="pt-4">プロフィール編集</h1>
-  <% if @user.errors.any? %>
-  <div class="alert alert-danger w-50">
-    <h5><%= @user.errors.count %>件のエラー</h5>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-       <li><h5><%= message %></h5></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-
-  <%= form_with model: @user do |f| %>
-    <label for="inputName"><h4>名前</h4></label>
-    <p><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"30字以内", class: "w-50" %></p>
-    <label for="inputImage"><h4>ユーザー画像</h4></label>
-    <p><%= f.file_field :profile_image, placeholdaer: "プロフィール画像", accept: "image/*" %></p>
-    <label for="inputIntroduction"><h4>自己紹介文</h4></label>
-    <p><%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"100文字以内", class: "w-50" %></p>
-    <p><%= f.submit "変更を保存", class: "btn btn-md btn-primary" %></p>
-  <% end %>
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-3">
+      <h5 class="text-dark bg-light p-4 mb-0">プロフィール編集</h5>
+      <div class="form-body p-4">
+        <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+          <h5><%= @user.errors.count %>件のエラー</h5>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+            <li><h5><%= message %></h5></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <%= form_with model: @user do |f| %>
+          <%= f.file_field :profile_image, accept: "image/*", class: "w-100" %>
+          <div class="input-group mb-3 mt-4">
+            <%= f.text_field :name, class: "form-control", placeholder: "ユーザー名：30文字以内" %>
+          </div>
+          <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "自己紹介文：100文字以内" %>
+          <hr>
+          <%= f.submit '更新', class: "btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
+    </div>
 </div>
+

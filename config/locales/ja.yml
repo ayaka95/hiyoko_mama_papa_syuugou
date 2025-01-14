@@ -12,4 +12,7 @@ ja:
       group:
         name: グループ名
         introduction: 紹介文
+      group_post:
+        title: タイトル
+        body: 本文
       

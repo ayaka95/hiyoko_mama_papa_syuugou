@@ -1,20 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 p-4">
-      <h1>グループ作成</h1>
-      <div class="card">
-        <div class="card-body">
-          <%= render 'error', group: @group %>
-          <%= form_with model: @group do |f| %>
-            <h4>グループ画像</h4>
-            <%= f.file_field :image, accept: "image/*" %>
-            <h4 class="pt-4">グループ名</h4>
-            <%= f.text_field :name, placeholder: "30字以内", class: "w-100" %>
-            <h4 class="pt-4">紹介文</h4>
-            <%= f.text_area :introduction, placeholder: "100文字以内", class: "w-100" %></br>
-            <%= f.submit "作成する", class: "btn btn-md btn-success" %>
-          <% end %>
-        </div>
+    <div class="col-md-4 col-sm-8 mx-2 mx-sm-auto shadow-lg rounded px-0 my-4">
+      <h5 class="text-dark bg-light p-4 mb-0">グループ作成</h5>
+      <div class="form-body p-4">
+        <%= form_with model: @group do |f| %>
+          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <div class="input-group mb-3 mt-4">
+            <%= f.text_field :name, class: "form-control", placeholder: "グループ名：30文字以内" %>
+          </div>
+          <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "紹介文：100文字以内" %>
+          <hr>
+          <%= f.submit '作成', class: "btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-8 p-4">
