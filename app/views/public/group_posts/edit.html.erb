@@ -4,7 +4,7 @@
       <h5 class="text-dark bg-light p-4 mb-0">グループ投稿編集</h5>
       <div class="form-body p-4">
         <%= render 'error', group_post: @group_post %>
-        <%= form_with model: @group_post, url: group_group_post_path(group_id: @group_post.group.id, id: @group_post), method: :patch do |f| %>
+        <%= form_with model: @group_post, url: group_group_post_path(group_id: @group_post.group.id, id: @group_post) do |f| %>
           <%= f.file_field :image, accept: "image/*", class: "w-100" %>
           <div class="input-group mb-3 mt-4">
             <%= f.text_field :title, class: "form-control", placeholder: "タイトル：30文字以内" %>

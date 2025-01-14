@@ -1,5 +1,7 @@
 class Public::GroupPostsController < ApplicationController
 
+  before_action :is_matching_login_user, only: [:edit, :update]
+  
   def new
   end
   
@@ -15,7 +17,7 @@ class Public::GroupPostsController < ApplicationController
     @group_post.group_user_id = @group_user.id
     @group_post.group_id = @group.id
     if @group_post.save
-      redirect_to group_group_post_path(group_id: @group_post.group_id, id: @group_post)
+      redirect_to group_group_post_path(group_id: @group.id, id: @group_post)
     else
       render :index
     end
@@ -31,7 +33,7 @@ class Public::GroupPostsController < ApplicationController
 
   def update
     @group_post = GroupPost.find(params[:id])
-    if @group_post.save
+    if @group_post.update(group_post_params)
       redirect_to group_group_post_path(group_id: @group_post.group.id, id: @group_post)
     else
       render :edit
@@ -48,6 +50,13 @@ class Public::GroupPostsController < ApplicationController
 
   def group_post_params
     params.require(:group_post).permit(:user_id, :title, :body, :image)
+  end
+
+  def is_matching_login_user
+    @group_post = GroupPost.find(params[:id])
+    unless @group_post.user_id == current_user.id
+      redirect_to post_path
+    end
   end
 
 
