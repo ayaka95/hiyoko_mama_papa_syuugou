@@ -26,6 +26,7 @@ class Public::GroupPostsController < ApplicationController
   end
 
   def show
+    @group = Group.find(params[:group_id])
     @group_post = GroupPost.find(params[:id])
     @group_comment = GroupComment.new
   end
@@ -52,7 +53,7 @@ class Public::GroupPostsController < ApplicationController
   private
 
   def group_post_params
-    params.require(:group_post).permit(:user_id, :title, :body, :image)
+    params.require(:group_post).permit(:title, :body, :image)
   end
 
   def is_matching_login_user

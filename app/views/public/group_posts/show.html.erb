@@ -27,9 +27,10 @@
     </div>
     <div class="col-md-5">
       <h1>コメント</h1>
-      <%= form_with model: [@group_post, @group_comment], url:  group_group_post_group_comments_path(group_id: @group_post.group_id, id: @group_post), class: "mt-4" do |f| %>
+      <%= form_with model: [@group_post, @group, @group_comment], url:  group_group_post_group_comments_path(group_id: @group, group_post_id: @group_post, group_comment_id: @group_cpmment), class: "mt-4" do |f| %>
         <%= f.text_area :group_comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
-        <%= f.hidden_field :group_post_id, value: @group_post.id %></br>
+        <%= f.hidden_field :group_post_id, value: @group_post.id %>
+        <%= f.hidden_field :group_id, value: @group.id %></br>
         <%= f.submit "送信する" %>
       <% end %>
       <h4 class="mt-5"><%= @group_post.group_comments.count %>件のコメント</h4>
