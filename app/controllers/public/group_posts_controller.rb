@@ -27,6 +27,7 @@ class Public::GroupPostsController < ApplicationController
 
   def show
     @group_post = GroupPost.find(params[:id])
+    @group_comment = GroupComment.new
   end
 
   def edit

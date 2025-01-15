@@ -3,6 +3,7 @@ class GroupUser < ApplicationRecord
   belongs_to :group
   belongs_to :user
   has_many :group_posts, dependent: :destroy
+  has_many :group_comments, dependent: :destroy
 
   def get_profile_image(width, height)
     unless user.profile_image.attached?
