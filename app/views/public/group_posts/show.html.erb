@@ -51,8 +51,8 @@
               <td><%= image_tag group_comment.group_user.get_profile_image(60,60), class: "rounded-circle" %></td>
               <td><%= group_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= group_comment.group_comment %></td>
-              <% if group_comment.group_user == current_user %>
-                <td><%= link_to "削除", group_group_post_group_comment_path(group_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
+              <% if group_comment.@group_user == current_user %>
+                <td><%= link_to "削除", group_group_post_group_comment_path(group_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>a
               <% end %>
             </th>
           </tr>

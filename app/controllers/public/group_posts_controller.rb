@@ -29,6 +29,8 @@ class Public::GroupPostsController < ApplicationController
     @group = Group.find(params[:group_id])
     @group_post = GroupPost.find(params[:id])
     @group_comment = GroupComment.new
+    @group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
+    @group_user == current_user
   end
 
   def edit
