@@ -30,7 +30,7 @@ class Public::GroupPostsController < ApplicationController
     @group_post = GroupPost.find(params[:id])
     @group_comment = GroupComment.new
     @group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
-    @group_user == current_user
+    @group_comment.group_user_id == @group_user.id
   end
 
   def edit
