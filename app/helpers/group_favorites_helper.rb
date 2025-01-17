@@ -1,0 +1,2 @@
+module GroupFavoritesHelper
+end

@@ -4,6 +4,7 @@ class GroupPost < ApplicationRecord
   belongs_to :group_user
   belongs_to :group
   has_many :group_comments, dependent: :destroy
+  has_many :group_favorites, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :body, presence: true, length: { maximum: 100 }
