@@ -25,5 +25,40 @@
       </div>
       <%= link_to "グループ投稿一覧", group_group_posts_path(@group_post.group), class: "btn btn-outline-secondary btn-block p-3" %>
     </div>
+    <div class="col-md-5">
+      <h1>コメント</h1>
+      <%= form_with model: [@group_post, @group, @group_comment], url:  group_group_post_group_comments_path(group_id: @group, group_post_id: @group_post, group_comment_id: @group_cpmment), class: "mt-4" do |f| %>
+        <%= f.text_area :group_comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
+        <%= f.hidden_field :group_post_id, value: @group_post.id %>
+        <%= f.hidden_field :group_id, value: @group.id %></br>
+        <%= f.submit "送信する" %>
+      <% end %>
+      <h4 class="mt-5"><%= @group_post.group_comments.count %>件のコメント</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">ユーザー</th>
+            <th scope="col"></th>
+            <th scope="col">コメント</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <% @group_post.group_comments.each do |group_comment| %>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <td><%= image_tag group_comment.group_user.get_profile_image(60,60), class: "rounded-circle" %></td>
+              <td><%= group_comment.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= group_comment.group_comment %></td>
+              <% if group_comment.group_user_id == @group_user.id %>
+                <td><%= link_to "削除", group_group_post_group_comment_path(group_id: @group, group_post_id: @group_post, id: group_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
+              <% end %>
+            </th>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

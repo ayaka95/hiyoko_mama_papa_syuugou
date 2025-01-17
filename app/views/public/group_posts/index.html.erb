@@ -43,6 +43,7 @@
                   <%= group_post.title %>
                 <% end %>
               </td>
+              <td class="text-center"><%= link_to "#{group_post.group_comments.count}", group_group_post_path(group_id: group_post.group_id, id: group_post) %></td>
             </th>
           </tr>
         </tbody>
