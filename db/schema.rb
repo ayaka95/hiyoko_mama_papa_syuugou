@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2025_01_17_134247) do
   end
 
   create_table "group_favorites", force: :cascade do |t|
+    t.integer "group_id"
     t.integer "group_user_id"
     t.integer "group_post_id"
     t.datetime "created_at", precision: 6, null: false

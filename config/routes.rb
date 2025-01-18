@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resource :group_user, only: [:create, :destroy]
       resources :group_posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
         resources :group_comments, only: [:create, :destroy]
+        resource :group_favorite, only: [:create, :destroy]
       end
     end
     

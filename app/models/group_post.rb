@@ -17,4 +17,8 @@ class GroupPost < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def group_favorited_by?(group_user)
+    group_favorites.exists?(group_user_id: group_user.id)
+  end
+
 end

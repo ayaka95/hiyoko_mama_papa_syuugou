@@ -4,7 +4,6 @@ class Group < ApplicationRecord
   has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users, source: :user
   has_many :group_posts, dependent: :destroy
-  has_many :group_comments, dependent: :destroy
   belongs_to :owner, class_name: 'User'
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
