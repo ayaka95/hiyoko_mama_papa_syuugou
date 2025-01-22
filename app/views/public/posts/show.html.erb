@@ -24,7 +24,7 @@
           </p>
         <% end %>
         <% if @post.user == current_user %>
-          <strong class="m-4">❤️✖️<%= @post.favorites.count %></strong>
+          <strong class="m-4">❤️<%= @post.favorites.count %>いいね</strong>
         <% end %>
         <p class="mx-4">タイトル：<%= @post.title %></p>
         <p class="mx-4">本文：<%= @post.body %></p>

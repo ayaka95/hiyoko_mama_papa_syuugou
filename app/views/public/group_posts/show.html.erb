@@ -10,7 +10,7 @@
           <% end %>
         </div>
         <p class="mx-auto"><%= image_tag @group_post.get_group_post_image(400,400) %></p>
-        <% if @group_post.group_favorited_by?(@group_post.group_user) && @group_post.group_user_id != @group_user.id %>
+        <% if @group_post.group_favorited_by?(@group_user) && @group_post.group_user_id != @group_user.id %>
           <p class="mx-4">
             <%= link_to group_group_post_group_favorite_path(group_id: @group, group_post_id: @group_post), method: :delete do %>
               <strong>❤️<%=@group_post.group_favorites.count %>いいね</strong>
@@ -24,7 +24,7 @@
           </p>
         <% end %>
         <% if @group_post.group_user_id == @group_user.id %>
-          <strong class="m-4">❤️✖️<%= @group_post.group_favorites.count %></strong>
+          <strong class="m-4">❤️<%= @group_post.group_favorites.count %>いいね</strong>
         <% end %>
         <p class="mx-4">タイトル: <%= @group_post.title %></p>
         <p class="mx-4">本文:<%= @group_post.body %></p>
