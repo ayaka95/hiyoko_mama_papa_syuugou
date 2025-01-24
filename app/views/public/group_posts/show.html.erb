@@ -64,7 +64,10 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag group_comment.group_user.get_profile_image(60,60), class: "rounded-circle" %></td>
+              <td>
+                <%= image_tag group_comment.group_user.get_profile_image(60,60), class: "rounded-circle" %><br>
+                <%= group_comment.group_user.name %>
+                </td>
               <td><%= group_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td><%= group_comment.group_comment %></td>
               <% if group_comment.group_user_id == @group_user.id %>
