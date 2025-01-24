@@ -43,6 +43,20 @@
                   <%= group_post.title %>
                 <% end %>
               </td>
+              <td>
+                <% if group_post.favorited_by?(group_post.group_user) && group_post.group_user_id != group_user.id %>
+                  <%= link_to group_group_post_group_favorite_path(group_id: group_post.group.id, group_post_id: group_post.id), method: :delete do %>
+                    ❤️x<%= group_post.group_favorites.count %>
+                  <% end %>
+                <% elsif group_post.group_user_id != group_user.id %>
+                  <%= link_to group_group_post_group_favorite_path(group_id: group_post.group.id, group_post_id: group_post.id), method: :post do %>
+                    ♡x<%= group_post.group_favorites.count %>
+                  <% end %>
+                <% end %>
+                <% if group_post.group_user_id == group_user.id %>
+                  ❤️x<%= group_post.group_favorites.count %>
+                <% end %>
+              </td>
               <td class="text-center"><%= link_to "#{group_post.group_comments.count}", group_group_post_path(group_id: group_post.group_id, id: group_post) %></td>
             </th>
           </tr>
