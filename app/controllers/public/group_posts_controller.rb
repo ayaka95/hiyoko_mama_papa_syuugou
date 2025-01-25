@@ -8,6 +8,7 @@ class Public::GroupPostsController < ApplicationController
   def index
     @group_post = GroupPost.new
     @group = Group.find(params[:group_id])
+    @group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
     @group_posts = @group.group_posts.page(params[:page])
   end
 

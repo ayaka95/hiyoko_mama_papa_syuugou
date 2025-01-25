@@ -1,5 +1,6 @@
 class GroupComment < ApplicationRecord
 
+  belongs_to :group
   belongs_to :group_user
   belongs_to :group_post
 

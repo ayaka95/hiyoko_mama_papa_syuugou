@@ -31,7 +31,7 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td>
+              <td class="text-center">
                 <%= image_tag post.user.get_profile_image(60,60), class: "rounded-circle" %></br>
                 <%= link_to user_path(post.user.id) do %>
                   <%= post.user.name %>
