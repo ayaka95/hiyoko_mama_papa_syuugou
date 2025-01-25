@@ -92,4 +92,13 @@ end
   group.users << owner
 end
 
+group_users = GroupUser.all
+
+
+GroupPost.find_or_create_by!(title: "保育園") do |group_post|
+  group_post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
+  group_post.body = "入園してすぐは、登園すれば何かしら病気をもらってきます。１ヶ月は仕事になりません。"
+  group_post.group_user.user = olivia
+end
+
 
