@@ -50,7 +50,7 @@ end
 
 Post.find_or_create_by!(title: "砂遊び") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
-  post.body = '子供はみんな好きだけど、親はあまり推奨しません。'
+  post.body = "子供はみんな好きだけど、親はあまり好きではありません。"
   post.user = lucas
 end
 
@@ -82,7 +82,7 @@ users.each do |user|
   Favorite.create(user: user, post: random_post)
 end
 
-10.times do |n|
+3.times do |n|
   owner = User.all.sample
   group = Group.find_or_create_by!(
     name: "test#{n + 1}",
@@ -94,8 +94,29 @@ end
 
 GroupPost.find_or_create_by!(title: "保育園") do |group_post|
   group_post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
-  group_post.body = "入園してすぐは、登園すれば何かしら病気をもらってきます。１ヶ月は仕事になりません。"
-  group = Group.find(group.id)
+  group_post.body = "入園してすぐは、登園すれば何かしら病気をもらってきます。"
+  group_post.group = Group.all.sample
+  user = group_post.group.users.sample
+  group_user = GroupUser.find_by(group: group_post.group, user: user)
+  group_post.group_user = group_user
+end
+
+GroupPost.find_or_create_by!(title: "2歳") do |group_post|
+  group_post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
+  group_post.body = "言葉も行動範囲もどんどん広がり、成長が楽しみです。"
+  group_post.group = Group.all.sample
+  user = group_post.group.users.sample
+  group_user = GroupUser.find_by(group: group_post.group, user: user)
+  group_post.group_user = group_user
+end
+
+GroupPost.find_or_create_by!(title: "幼児教育") do |group_post|
+  group_post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
+  group_post.body = "たくさん種を蒔いてあげたいと思います。"
+  group_post.group = Group.all.sample
+  user = group_post.group.users.sample
+  group_user = GroupUser.find_by(group: group_post.group, user: user)
+  group_post.group_user = group_user
 end
 
 
