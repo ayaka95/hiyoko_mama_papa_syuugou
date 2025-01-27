@@ -32,6 +32,7 @@ class Public::GroupPostsController < ApplicationController
     @group_comment = GroupComment.new
     @group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
     @group_comment.group_user_id == @group_user.id
+    @group_comments = @group_post.group_comments.page(params[:page])
   end
 
   def edit

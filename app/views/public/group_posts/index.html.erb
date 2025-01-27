@@ -21,7 +21,7 @@
         <thead>
           <tr class="text-cente">
             <th scope="col"></th>
-            <th scope="col">ユーザー</th>
+            <th scope="col">ユーザ</th>
             <th scope="col">投稿</th>
             <th scope="col"></th>
             <th scope="col">コメント数</th>
@@ -31,7 +31,7 @@
         <tbody>
           <tr>
             <th scope="row">
-              <td>
+              <td class: "text-center">
                 <%= image_tag group_post.group_user.user.get_profile_image(60,60), class: "rounded-circle" %></br>
                 <%= link_to user_path(group_post.group_user.user.id) do %>
                   <%= group_post.group_user.user.name %>

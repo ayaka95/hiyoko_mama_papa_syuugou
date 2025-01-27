@@ -9,7 +9,7 @@
             <h4 class="ml-3 mt-5"><%= @post.user.name %></h4>
           <% end %>
         </div>
-        <p class="mx-auto"><%= image_tag @post.get_image(400,400) %></p>
+        <p class="mx-auto"><%= image_tag @post.get_image(400, 400), class: "img-fluid" %></p>
         <% if @post.favorited_by?(current_user) && @post.user != current_user %>
           <p class="mx-4">
             <%= link_to post_favorite_path(@post), method: :delete do %>
@@ -52,13 +52,13 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">ユーザー</th>
+            <th scope="col">ユーザ</th>
             <th scope="col"></th>
             <th scope="col">コメント</th>
             <th scope="col"></th>
           </tr>
         </thead>
-        <% @post.post_comments.each do |post_comment| %>
+        <% @post_comments.each do |post_comment| %>
         <tbody>
           <tr>
             <th scope="row">
@@ -76,6 +76,7 @@
         </tbody>
         <% end %>
       </table>
+      <%= paginate @post_comments %>
     </div>
   </div>
 </div>

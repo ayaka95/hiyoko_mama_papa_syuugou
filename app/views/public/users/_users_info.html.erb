@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <p class="text-center"><%= image_tag user.get_profile_image(200,200), class: 'rounded-circle' %></p>
+    <p class="text-center"><%= image_tag user.get_profile_image(200,200), class: 'img-fluid rounded-circle' %></p>
     <p class="pt-2">名前：<%= user.name %></p>
     <p>紹介文：<%= user.introduction %><p>
     <% if user == current_user %>

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-7 col-sm-12">
       <h1>グループ投稿詳細</h1>
       <div class="card mt-4 shadow-lg">
         <div class="row mx-4">
@@ -9,7 +9,7 @@
             <h4 class="ml-3 mt-5"><%= @group_post.group_user.user.name %></h4>
           <% end %>
         </div>
-        <p class="mx-auto"><%= image_tag @group_post.get_group_post_image(400,400) %></p>
+        <p class="mx-auto"><%= image_tag @group_post.get_group_post_image(400,400), class: "img-fluid" %></p>
         <% if @group_post.group_favorited_by?(@group_user) && @group_post.group_user_id != @group_user.id %>
           <p class="mx-4">
             <%= link_to group_group_post_group_favorite_path(group_id: @group, group_post_id: @group_post), method: :delete do %>
@@ -41,7 +41,7 @@
       </div>
       <%= link_to "グループ投稿一覧", group_group_posts_path(@group_post.group), class: "btn btn-outline-secondary btn-block p-3" %>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 col-sm-12">
       <h1>コメント</h1>
       <%= form_with model: [@group_post, @group, @group_comment], url:  group_group_post_group_comments_path(group_id: @group, group_post_id: @group_post, group_comment_id: @group_cpmment), class: "mt-4" do |f| %>
         <%= f.text_area :group_comment, rows: '7', placeholder: "50文字以内でコメントしてください", class: "w-100" %>
@@ -54,13 +54,13 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">ユーザー</th>
+            <th scope="col">ユーザ</th>
             <th scope="col"></th>
             <th scope="col">コメント</th>
             <th scope="col"></th>
           </tr>
         </thead>
-        <% @group_post.group_comments.each do |group_comment| %>
+        <% @group_comments.each do |group_comment| %>
         <tbody>
           <tr>
             <th scope="row">
@@ -78,6 +78,7 @@
         </tbody>
         <% end %>
       </table>
+      <%= paginate @group_comments %>
     </div>
   </div>
 </div>
