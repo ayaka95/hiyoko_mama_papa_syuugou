@@ -20,30 +20,40 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">画像</th>
-            <th scope="col">名前</th>
+            <th scope="col"></th>
+            <th scope="col">グループ</th>
             <th scope="col">紹介文</th>
             <th scope="col">メンバー数</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <% @groups.each do |group| %>
         <tbody>
           <tr>
             <th scope="row">
-              <td><%= image_tag group.get_group_image(60,60), class: "rounded-circle" %></td>
+              <% if group.group_users.include?(current_user) %>
+                <td>⭐️</td>
+              <% else %>
+                <td></td>
+              <% end %>
               <td>
+                <%= image_tag group.get_group_image(60,60), class: "rounded-circle" %><br>
                 <%= link_to group_path(group.id) do %>
                   <%= group.name %>
                 <% end %>
               </td>
               <td><%= group.introduction %></td>
-              <td><%= group.group_users.count %>メンバー</td>
+              <td><%= group.group_users.count %></td>
+              
             </th>
           </tr>
         </tbody>
         <% end %>
       </table>
-      <p>※作成者をメンバーとしてカウントします</p>
+      <p>
+        ※作成者をメンバーとしてカウントします<br>
+        ※参加しているグループには⭐️が表示されます
+      </p>
       <%= paginate @groups %>
     </div>
   </div>

@@ -1,15 +1,16 @@
 <div class="container">
+  <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
   <% if @range == "投稿" %>
   <h1 class="p-4">"<%= @word %>"の投稿検索結果</h1>
   <% @posts.each do |post| %>
-  <div class="card w-50 mx-auto mt-4 shadow-lg">
+  <div class="card col-md-6 mx-auto mt-4 shadow-lg">
     <div class="row mx-4">
       <p class="mt-4"><%= image_tag post.user.get_profile_image(60,60), class: "rounded-circle" %></p>
       <%= link_to user_path(post.user.id) do %>
         <h4 class="ml-3 mt-5"><%= post.user.name %></h4>
       <% end %>
     </div>
-    <p class="mx-auto"><%= image_tag post.get_image(400,400) %></p>
+    <p class="mx-auto"><%= image_tag post.get_image(400,400), class: "img-fluid" %></p>
     <%= link_to post_path(post.id) do %>
       <p class="mx-4">タイトル: <%= post.title %></h4>
     <% end %>
@@ -21,9 +22,9 @@
   <% if @range == "ユーザー" %>
     <h1 class="p-4">"<%= @word %>"のユーザー検索結果</h1>
     <% @users.each do |user| %>
-      <div class="card w-50 mx-auto mt-4 shadow-lg">
+      <div class="card col-md-6 mx-auto mt-4 shadow-lg">
         <div class="card-body">
-          <p class="text-center"><%= image_tag user.get_profile_image(200,200), class: 'rounded-circle' %></p>
+          <p class="text-center"><%= image_tag user.get_profile_image(200,200), class: 'img-fluid rounded-circle' %></p>
           <%= link_to user_path(user.id), class: "p-4" do %>
             <%= user.name %>
           <% end %>
