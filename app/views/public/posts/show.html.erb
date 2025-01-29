@@ -13,26 +13,27 @@
         <% if @post.favorited_by?(current_user) && @post.user != current_user %>
           <p class="mx-4">
             <%= link_to post_favorite_path(@post), method: :delete do %>
-              <strong>❤️<%=@post.favorites.count %>いいね</strong>
+              <strong>❤️<%=@post.favorites.count %></strong>
             <% end %>
           </p>
         <% elsif @post.user != current_user %>
           <p class="mx-4">
             <%= link_to post_favorite_path(@post), method: :post do %>
-              <strong>♡<%= @post.favorites.count %>いいね</strong>
+              <strong>♡<%= @post.favorites.count %></strong>
             <% end %>
           </p>
         <% end %>
         <% if @post.user == current_user %>
-          <strong class="m-4">❤️<%= @post.favorites.count %>いいね</strong>
+          <strong class="m-4">❤️<%= @post.favorites.count %></strong>
         <% end %>
         <p class="mx-4">タイトル：<%= @post.title %></p>
         <p class="mx-4">本文：<%= @post.body %></p>
+        <%= content_tag :p, @post.created_at.strftime('%Y/%m/%d'), class: "mx-4 text-right" %>
       </div>
       <div class="row">
         <% if @post.user == current_user %>
         <div class="col-md p-3">
-          <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-md btn-block btn-danger", "data-confirm" => "投稿を削除しますか？" %>
+          <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "投稿を削除しますか？", class: "btn btn-md btn-block btn-danger" %>
         </div>
         <div class="col-md p-3">
           <%= link_to "編集", edit_post_path(@post), class: "btn btn-md btn-block btn-info" %>
@@ -47,14 +48,13 @@
         <%= f.hidden_field :post_id, value: @post.id %></br>
         <%= f.submit "送信する" %>
       <% end %>
-      <h4 class="mt-5"><%= @post.post_comments.count %>件のコメント</h4>
+      <h4 class="mt-5"><i class="fa-regular fa-comment"></i><%= @post.post_comments.count %></h4>
       <table class="table">
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">ユーザ</th>
             <th scope="col"></th>
-            <th scope="col">コメント</th>
+            <th scope="col-md-2">コメント</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -66,10 +66,12 @@
                 <%= image_tag post_comment.user.get_profile_image(60,60), class: "rounded-circle" %><br>
                 <%= post_comment.user.name %>
               </td>
-              <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-              <td><%= post_comment.comment %></td>
+              <td>
+                <%= post_comment.comment %><br>
+                <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+              </td>
               <% if post_comment.user == current_user %>
-                <td><%= link_to "削除", post_post_comment_path(post_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
+                <td><%= link_to "削除", post_post_comment_path(post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class: "btn btn-sm btn-danger" %></td>
               <% end %>
             </th>
           </tr>

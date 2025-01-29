@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-4 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-3">
-      <h5 class="text-dark bg-light p-4 mb-0">グループ投稿フォーム</h5>
+      <h5 class="text-dark bg-light p-4 mb-0">新規グループ投稿</h5>
       <div class="form-body p-4">
         <%= render 'error', group_post: @group_post %>
         <%= form_with model: @group_post, url: group_group_posts_path(params[:group_id]) do |f| %>
@@ -24,7 +24,7 @@
             <th scope="col">ユーザ</th>
             <th scope="col">投稿</th>
             <th scope="col"></th>
-            <th scope="col">コメント数</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <% @group_posts.each do |group_post| %>
@@ -46,18 +46,19 @@
               <td>
                 <% if group_post.group_favorited_by?(@group_user) && group_post.group_user_id != @group_user.id %>
                   <%= link_to group_group_post_group_favorite_path(group_id: group_post.group.id, group_post_id: group_post.id), method: :delete do %>
-                    ❤️x<%= group_post.group_favorites.count %>
+                    ❤️<%= group_post.group_favorites.count %>
                   <% end %>
                 <% elsif group_post.group_user_id != @group_user.id %>
                   <%= link_to group_group_post_group_favorite_path(group_id: group_post.group.id, group_post_id: group_post.id), method: :post do %>
-                    ♡x<%= group_post.group_favorites.count %>
+                    ♡<%= group_post.group_favorites.count %>
                   <% end %>
                 <% end %>
                 <% if group_post.group_user_id == @group_user.id %>
-                  ❤️x<%= group_post.group_favorites.count %>
+                  ❤️<%= group_post.group_favorites.count %>
                 <% end %>
+                <br><i class="fa-regular fa-comment"></i><%= link_to "#{group_post.group_comments.count}", group_group_post_path(group_id: group_post.group_id, id: group_post) %>
               </td>
-              <td class="text-center"><%= link_to "#{group_post.group_comments.count}", group_group_post_path(group_id: group_post.group_id, id: group_post) %></td>
+              <%= content_tag :td, group_post.created_at.strftime('%Y/%m/%d') %>
             </th>
           </tr>
         </tbody>

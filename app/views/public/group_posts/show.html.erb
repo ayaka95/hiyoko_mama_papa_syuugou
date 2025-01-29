@@ -13,21 +13,22 @@
         <% if @group_post.group_favorited_by?(@group_user) && @group_post.group_user_id != @group_user.id %>
           <p class="mx-4">
             <%= link_to group_group_post_group_favorite_path(group_id: @group, group_post_id: @group_post), method: :delete do %>
-              <strong>❤️<%=@group_post.group_favorites.count %>いいね</strong>
+              <strong>❤️<%=@group_post.group_favorites.count %></strong>
             <% end %>
           </p>
         <% elsif @group_post.group_user_id != @group_user.id %>
           <p class="mx-4">
             <%= link_to group_group_post_group_favorite_path(group_id: @group, group_post_id: @group_post), method: :post do %>
-              <strong>♡<%= @group_post.group_favorites.count %>いいね</strong>
+              <strong>♡<%= @group_post.group_favorites.count %></strong>
             <% end %>
           </p>
         <% end %>
         <% if @group_post.group_user_id == @group_user.id %>
-          <strong class="m-4">❤️<%= @group_post.group_favorites.count %>いいね</strong>
+          <strong class="m-4">❤️<%= @group_post.group_favorites.count %></strong>
         <% end %>
         <p class="mx-4">タイトル: <%= @group_post.title %></p>
         <p class="mx-4">本文:<%= @group_post.body %></p>
+        <%= content_tag :p, @group_post.created_at.strftime('%Y/%m/%d'), class: "mx-4 text-right" %>
       </div>
       <div class="row">
         <% if @group_post.group_user.user == current_user %>
@@ -49,14 +50,13 @@
         <%= f.hidden_field :group_id, value: @group.id %></br>
         <%= f.submit "送信する" %>
       <% end %>
-      <h4 class="mt-5"><%= @group_post.group_comments.count %>件のコメント</h4>
+      <h4 class="mt-5"><i class="fa-regular fa-comment"></i><%= @group_post.group_comments.count %></h4>
       <table class="table">
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">ユーザ</th>
             <th scope="col"></th>
-            <th scope="col">コメント</th>
+            <th scope="col-md-2">コメント</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -67,11 +67,13 @@
               <td class="text-center">
                 <%= image_tag group_comment.group_user.get_profile_image(60,60), class: "rounded-circle" %><br>
                 <%= group_comment.group_user.user.name %>
-                </td>
-              <td><%= group_comment.created_at.strftime('%Y/%m/%d') %></td>
-              <td><%= group_comment.group_comment %></td>
+              </td>
+              <td>
+                <%= group_comment.group_comment %>
+                <br><%= group_comment.created_at.strftime('%Y/%m/%d') %>
+              </td>
               <% if group_comment.group_user_id == @group_user.id %>
-                <td><%= link_to "削除", group_group_post_group_comment_path(group_id: @group, group_post_id: @group_post, id: group_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
+                <td><%= link_to "削除", group_group_post_group_comment_path(group_id: @group, group_post_id: @group_post, id: group_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class: "btn btn-sm btn-danger" %></td>
               <% end %>
             </th>
           </tr>

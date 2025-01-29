@@ -4,15 +4,15 @@
       <div class="input-group">
         <div class="input-group-prepend w-100">
           <%= f.submit '検索', class: "input-group-text" %>
-          <%= f.text_field :word, value: session[:search_params][:word], placeholder: "名前、タイトル、他", class: :"form-control" %>
+          <%= f.text_field :word, value: (session[:search_params])? session[:search_params][:word]:"", placeholder: "名前、タイトル、他", class: :"form-control" %>
         </div>
       </div>
     </div>
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-prepend">
-          <%= f.select :range, options_for_select([['ユーザー'], ['投稿']], session[:search_params][:range]) %>
-          <%= f.select :search, options_for_select({"完全一致" => "perfect_match", "部分一致" => "partial_match"}, session[:search_params][:search]) %>
+          <%= f.select :range, options_for_select([['ユーザー'], ['投稿']], session[:search_params]? session[:search_params][:range]:"") %>
+          <%= f.select :search, options_for_select({"完全一致" => "perfect_match", "部分一致" => "partial_match"}, session[:search_params]? session[:search_params][:search]:"") %>
         </div>
       </div>
     </div>
