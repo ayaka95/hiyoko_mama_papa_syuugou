@@ -5,7 +5,7 @@
       <tr>
         <th scope="col"></th>
         <th scope="col">投稿画像</th>
-        <th scope="col">本文</th>
+        <th scope="col-md-2">本文</th>
       </tr>
     </thead>
     <% posts.each do |post| %>
@@ -18,7 +18,10 @@
               <%= post.title %>
             <% end %>
           </td>
-          <td><%= post.body %></td>
+          <td>
+            <%= post.body %><br>
+            <%= post.created_at.strftime('%Y/%m/%d') %>
+          </td>
         </th>
       </tr>
     </tbody>

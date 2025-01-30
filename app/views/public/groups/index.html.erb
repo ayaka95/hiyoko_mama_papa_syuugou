@@ -3,6 +3,7 @@
     <div class="col-md-4 col-sm-8 mx-2 mx-sm-auto shadow-lg rounded px-0 my-4">
       <h5 class="text-dark bg-light p-4 mb-0">グループ作成</h5>
       <div class="form-body p-4">
+        <%= render 'error', group: @group %>
         <%= form_with model: @group do |f| %>
           <%= f.file_field :image, accept: "image/*", class: "w-100" %>
           <div class="input-group mb-3 mt-4">
@@ -23,7 +24,7 @@
             <th scope="col"></th>
             <th scope="col">グループ</th>
             <th scope="col">紹介文</th>
-            <th scope="col">メンバー数</th>
+            <th scope="col"><i class="fa-solid fa-users"></i></th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -31,8 +32,8 @@
         <tbody>
           <tr>
             <th scope="row">
-              <% if group.group_users.include?(current_user) %>
-                <td>⭐️</td>
+              <% if group.include_user?(current_user) %>
+                <td class="pt-4">⭐️</td>
               <% else %>
                 <td></td>
               <% end %>
@@ -43,7 +44,7 @@
                 <% end %>
               </td>
               <td><%= group.introduction %></td>
-              <td><%= group.group_users.count %></td>
+              <td class="pt-4"><%= group.group_users.count %></td>
               
             </th>
           </tr>

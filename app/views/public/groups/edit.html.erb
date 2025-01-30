@@ -12,6 +12,7 @@
           <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "紹介文：100文字以内" %>
           <hr>
           <%= f.submit '更新', class: "btn btn-lg btn-block btn-info mt-4" %>
+          <%= link_to "戻る", group_path(@group), class: 'btn btn-outline-secondary btn-block' %>
         <% end %>
       </div>
     </div>
