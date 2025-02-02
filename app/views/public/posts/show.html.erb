@@ -58,7 +58,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <% @post_comments.each do |post_comment| %>
+        <% @post_comments.order(created_at: :desc).each do |post_comment| %>
         <tbody>
           <tr>
             <th scope="row">

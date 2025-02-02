@@ -13,7 +13,9 @@ class Public::GroupCommentsController < ApplicationController
   def destroy
     group_comment = GroupComment.find(params[:id])
     group_comment.destroy
-    redirect_to request.referer
+    group = Group.find(params[:group_id])
+    group_post = GroupPost.find(params[:group_post_id])
+    redirect_to group_group_post_path(group_id: group.id, id: group_post.id)
   end
 
   private

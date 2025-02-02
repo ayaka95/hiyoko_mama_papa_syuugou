@@ -60,7 +60,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <% @group_comments.each do |group_comment| %>
+        <% @group_comments.order(created_at: :desc).each do |group_comment| %>
         <tbody>
           <tr>
             <th scope="row">

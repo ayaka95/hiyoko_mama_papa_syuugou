@@ -27,7 +27,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <% @group_posts.each do |group_post| %>
+        <% @group_posts.order(created_at: :desc).each do |group_post| %>
         <tbody>
           <tr>
             <th scope="row">
