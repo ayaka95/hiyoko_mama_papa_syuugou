@@ -20,7 +20,7 @@ describe '投稿のテスト' do
         expect(current_path).to eq('/posts')
       end
       it '投稿ボタンが表示されているか' do
-        expect(page).to have_button '投稿'
+        expect(page).to have_button '作成'
       end
     end
     context '投稿処理のテスト' do
@@ -29,15 +29,15 @@ describe '投稿のテスト' do
         fill_in 'post[body]', with: Faker::Lorem.characters(number:50)
       end
       it '投稿が正しく保存されるか' do
-        expect{ click_button '投稿' }.to change(user.posts, :count).by(1)
+        expect{ click_button '作成' }.to change(user.posts, :count).by(1)
       end
       it 'リダイレクト先が、投稿の詳細画面になっている' do
-        click_button '投稿'
+        click_button '作成'
         expect(page).to have_current_path post_path(Post.last)
       end
       it '投稿失敗後の遷移先が正しいか' do
         fill_in 'post[title]', with: nil
-        click_button '投稿'
+        click_button '作成'
         expect(page).to have_current_path posts_path
       end
     end
@@ -62,7 +62,7 @@ describe '投稿のテスト' do
       visit posts_path
       fill_in 'post[title]', with: Faker::Lorem.characters(number:10)
       fill_in 'post[body]', with: Faker::Lorem.characters(number:50)
-      click_button '投稿'
+      click_button '作成'
       visit post_path(post)
     end
     context '表示の確認' do
@@ -100,7 +100,7 @@ describe '投稿のテスト' do
         expect(page).to have_field 'post[body]', with: post.body
       end
       it '保存ボタンが表示されている' do
-        expect(page).to have_button '保存'
+        expect(page).to have_button '更新'
       end
     end
     context '更新処理に関するテスト' do
@@ -109,7 +109,7 @@ describe '投稿のテスト' do
         @post_old_body = post.body
         fill_in 'post[title]', with: Faker::Lorem.characters(number:10)
         fill_in 'post[body]', with: Faker::Lorem.characters(number:50)
-        click_button '保存'
+        click_button '更新'
       end
       it 'タイトルが正しく更新されるか' do
         expect(post.reload.title).not_to eq @post_old_title

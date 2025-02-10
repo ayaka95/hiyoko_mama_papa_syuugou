@@ -147,7 +147,7 @@ describe 'ログイン状態でのテスト' do
       expect(page).to have_field 'user[introduction]', with: user.introduction
     end
     it '変更を保存ボタンが表示されているか' do
-      expect(page).to have_button '変更を保存'
+      expect(page).to have_button '更新'
     end
   end
   context 'プロフィール編集画面での更新処理に関するテスト' do
@@ -157,7 +157,7 @@ describe 'ログイン状態でのテスト' do
       @user_old_introduction = user.introduction
       fill_in 'user[name]', with: '"user_#{n}"'
       fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 100)
-      click_button '変更を保存'
+      click_button '更新'
     end
     it 'ユーザー名が正しく更新されるか' do
       expect(user.reload.name).not_to eq @user_old_name
