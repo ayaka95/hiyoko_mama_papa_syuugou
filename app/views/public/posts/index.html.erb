@@ -1,72 +1,72 @@
 <div class="container">
-  <%= render partial: 'layouts/search', locals: { range: @range, word: @word, search: @search } %>
-  <div class="row">
-    <div class="col-md-4 col-sm-8 mx-2 mx-sm-auto shadow-lg rounded px-0 my-4">
-      <h5 class="text-dark bg-light p-4 mb-0">新規投稿</h5>
-      <div class="form-body p-4">
-        <%= render 'error', post: @post %>
-        <%= form_with model: @post do |f| %>
-          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
-          <div class="input-group mb-3 mt-4">
-            <%= f.text_field :title, class: "form-control", placeholder: "タイトル：30文字以内" %>
-          </div>
-          <%= f.text_area :body, class: "form-control", rows: "3", placeholder: "本文：100文字以内" %>
-          <hr>
-          <%= f.submit '作成', class: "btn btn-lg btn-block btn-info mt-4" %>
-        <% end %>
+  <%= render partial: 'layouts/search' , locals: { range: @range, word: @word, search: @search } %>
+    <div class="row">
+      <div class="col-md-4 col-sm-8 mx-2 mx-sm-auto shadow-lg rounded px-0 my-4">
+        <h5 class="text-dark bg-light p-4 mb-0">新規投稿</h5>
+        <div class="form-body p-4">
+          <%= render 'error' , post: @post %>
+            <%= form_with model: @post do |f| %>
+              <%= f.file_field :image, accept: "image/*" , class: "w-100" %>
+                <div class="input-group mb-3 mt-4">
+                  <%= f.text_field :title, class: "form-control" , placeholder: "タイトル：30文字以内" %>
+                </div>
+                <%= f.text_area :body, class: "form-control" , rows: "3" , placeholder: "本文：100文字以内" %>
+                  <hr>
+                  <%= f.submit '作成' , class: "btn btn-lg btn-block btn-info mt-4" %>
+                    <% end %>
+        </div>
+      </div>
+      <div class="col-md-8 pt-4">
+        <h1>投稿一覧</h1>
+        <table class="table">
+          <thead>
+            <tr class="text-cente">
+              <th scope="col"></th>
+              <th scope="col">ユーザ</th>
+              <th scope="col">投稿</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <% @posts.order(created_at: :desc).each do |post| %>
+            <tbody>
+              <tr>
+                <th scope="row">
+                <td>
+                  <%= image_tag post.user.get_profile_image(60,60), class: "rounded-circle" %></br>
+                    <%= link_to user_path(post.user.id) do %>
+                      <%= post.user.name %>
+                        <% end %>
+                </td>
+                <td>
+                  <%= image_tag post.get_image(100,100) %></br>
+                    <%= link_to post_path(post.id) do %>
+                      <%= post.title %>
+                        <% end %>
+                </td>
+                <td>
+                  <% if post.favorited_by?(current_user) && post.user !=current_user %>
+                    <%= link_to post_favorite_path(post), method: :delete do %>
+                      ❤️<%= post.favorites.count %>
+                        <% end %>
+                          <% elsif post.user !=current_user %>
+                            <%= link_to post_favorite_path(post), method: :post do %>
+                              ♡<%= post.favorites.count %>
+                                <% end %>
+                                  <% end %>
+                                    <% if post.user==current_user %>
+                                      ❤️<%= post.favorites.count %>
+                                        <% end %>
+                                          <br><i class="fa-regular fa-comment"></i>
+                                          <%= link_to "#{post.post_comments.count}" , post_path(post.id) %>
+                </td>
+                <%= content_tag :td, post.created_at.strftime('%Y/%m/%d'), class: "mx-4 text-right" %>
+                  </th>
+              </tr>
+            </tbody>
+            <% end %>
+        </table>
+        <%= paginate @posts %>
       </div>
     </div>
-    <div class="col-md-8 pt-4">
-      <h1>投稿一覧</h1>
-      <table class="table">
-        <thead>
-          <tr class="text-cente">
-            <th scope="col"></th>
-            <th scope="col">ユーザ</th>
-            <th scope="col">投稿</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <% @posts.order(created_at: :desc).each do |post| %>
-        <tbody>
-          <tr>
-            <th scope="row">
-              <td>
-                <%= image_tag post.user.get_profile_image(60,60), class: "rounded-circle" %></br>
-                <%= link_to user_path(post.user.id) do %>
-                  <%= post.user.name %>
-                <% end %>
-              </td>
-              <td>
-                <%= image_tag post.get_image(100,100) %></br>
-                <%= link_to post_path(post.id) do %>
-                  <%= post.title %>
-                <% end %>
-              </td>
-              <td>
-                <% if post.favorited_by?(current_user) && post.user != current_user %>
-                  <%= link_to post_favorite_path(post), method: :delete do %>
-                    ❤️<%= post.favorites.count %>
-                  <% end %>
-                <% elsif post.user != current_user %>
-                  <%= link_to post_favorite_path(post), method: :post do %>
-                    ♡<%= post.favorites.count %>
-                  <% end %>
-                <% end %>
-                <% if post.user == current_user %>
-                  ❤️<%= post.favorites.count %>
-                <% end %>
-                <br><i class="fa-regular fa-comment"></i><%= link_to "#{post.post_comments.count}", post_path(post.id) %>
-              </td>
-              <%= content_tag :td, post.created_at.strftime('%Y/%m/%d'), class: "mx-4 text-right" %>
-            </th>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
-    <%= paginate @posts %>
-    </div>
-  </div>
 </div>
-
