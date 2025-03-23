@@ -8,7 +8,10 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import "jquery";
+import $ from "jquery";
+window.$ = $;
+window.jQuery = $;
+
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
@@ -17,12 +20,13 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-$(function() {
-  $('#back a').on('click',function(event){
-    $('body, html').animate({
-      scrollTop:0
-    }, 800);
+$(document).on("turbolinks:lood", function () {
+  $('#back').on('click', function (event) {
     event.preventDefault();
+    $('html, body').animate({
+      scrollTop: 0
+    }, 800);
+
   });
 });
 
